@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İlm-i Hâl Fetva Portalı | Modern Rehber</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-deep: #1e293b;
+            --accent-gold: #b45309;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .faq-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .active-filter {
+            background-color: #1e293b !important;
+            color: white !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-amber-500 font-bold text-xl">İH</div>
+                <h1 class="text-xl md:text-2xl font-bold tracking-tight text-slate-900 serif-font">İlm-i Hâl <span class="text-amber-600">Fetva Portalı</span></h1>
+            </div>
+            <div class="relative hidden md:block w-72">
+                <input type="text" id="searchInput" onkeyup="filterSearch()" placeholder="Soru ara..." class="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-full focus:ring-2 focus:ring-amber-500 focus:outline-none text-sm">
+                <span class="absolute left-3 top-2.5 text-slate-400">🔍</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        
+        <div class="bg-slate-900 rounded-2xl p-8 mb-8 text-white relative overflow-hidden shadow-xl">
+            <div class="relative z-10 max-w-2xl">
+                <h2 class="text-3xl font-bold mb-4 serif-font">Güncel Meselelere Fıkhî Çözümler</h2>
+                <p class="text-slate-300 mb-6">İbadet, aile ve sosyal hayatınıza dair merak ettiğiniz fıkhi soruların güvenilir kaynaklardan derlenmiş özet cevaplarına buradan ulaşabilirsiniz.</p>
+                <div class="flex flex-wrap gap-4">
+                    <div class="bg-slate-800/50 backdrop-blur px-4 py-2 rounded-lg border border-slate-700">
+                        <span class="text-amber-500 font-bold block text-xl">10+</span>
+                        <span class="text-xs uppercase text-slate-400">Yeni Fetva</span>
+                    </div>
+                    <div class="bg-slate-800/50 backdrop-blur px-4 py-2 rounded-lg border border-slate-700">
+                        <span class="text-amber-500 font-bold block text-xl">5</span>
+                        <span class="text-xs uppercase text-slate-400">Ana Kategori</span>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute top-0 right-0 opacity-10 pointer-events-none transform translate-x-1/4 -translate-y-1/4">
+                <div class="w-96 h-96 border-[40px] border-amber-500 rounded-full"></div>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 mb-8 overflow-x-auto pb-2 custom-scrollbar" id="filterContainer">
+            <button onclick="filterCategory('all', event)" class="category-btn active-filter px-6 py-2 rounded-full border border-slate-200 text-sm font-medium hover:bg-slate-100 transition">Tümü</button>
+            <button onclick="filterCategory('ibadet', event)" class="category-btn px-6 py-2 rounded-full border border-slate-200 text-sm font-medium hover:bg-slate-100 transition">Namaz & Abdest</button>
+            <button onclick="filterCategory('aile', event)" class="category-btn px-6 py-2 rounded-full border border-slate-200 text-sm font-medium hover:bg-slate-100 transition">Aile & Sosyal Hayat</button>
+            <button onclick="filterCategory('inancl', event)" class="category-btn px-6 py-2 rounded-full border border-slate-200 text-sm font-medium hover:bg-slate-100 transition">İnanç & Nazar</button>
+            <button onclick="filterCategory('gunluk', event)" class="category-btn px-6 py-2 rounded-full border border-slate-200 text-sm font-medium hover:bg-slate-100 transition">Günlük Meseleler</button>
+            <button onclick="filterCategory('egitim', event)" class="category-btn px-6 py-2 rounded-full border border-slate-200 text-sm font-medium hover:bg-slate-100 transition">Eğitim & Hafızlık</button>
+        </div>
+
+        <div class="grid gap-4" id="faqGrid">
+            <div class="faq-item group" data-category="ibadet">
+                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <button class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 focus:outline-none" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-800 group-hover:text-amber-700 transition">Soru: Her abdestten sonra gaz sorunu yaşayan kişi özür sahibi mi olur? Cemaate namaz kıldırabilir mi?</span>
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-amber-50 group-hover:text-amber-600 transition">＋</span>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden faq-transition">
+                        <div class="px-6 pb-6 pt-2 border-t border-slate-50">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="px-2 py-1 bg-amber-100 text-amber-700 text-[10px] font-bold uppercase rounded">Fetva Özeti</span>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed">Bir kişinin özür sahibi sayılabilmesi için, bir namaz vakti boyunca farz namazı kılabilecek kadar dahi ara vermeksizin bu durumun devam etmesi gerekir. Özür sabit olduktan sonra, kişi her namaz vakti için yeni abdest alır ve o vakit içinde dilediği kadar namaz kılabilir. Ancak özür sahibi bir kimse, özrü olmayanlara imamlık yapamaz; bu yüzden evde cemaatle namaz kıldırması uygun değildir.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item" data-category="ibadet">
+                <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <button class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 focus:outline-none" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-slate-800">Soru: Tahiyyat'ta selam vermeden hemen önce gaz çıksa veya kişi gülse namaz bozulur mu?</span>
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400">＋</span>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden faq-transition">
+                        <div class="px-6 pb-6 pt-2 border-t border-slate-50">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="px-2 py-1 bg-amber-100 text-amber-700 text-[10px] font-bold uppercase rounded">Fetva Özeti</span>
+                            </div>
+                            <p class="text-slate-600 leading-relaxed">Son teşehhütte Tahiyyat miktarı oturmak farzdır. Namazdan selam ile çıkmak ise vaciptir. Farz olan oturma süresi tamamlandıktan sonra namazın aslı tamamlanmış sayılır; ancak selam ile çıkmamak vacibin terki anlamına gelir.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+
+        <div id="noResults" class="hidden text-center py-20">
+            <div class="text-slate-300 text-6xl mb-4">📭</div>
+            <h3 class="text-lg font-medium text-slate-500">Aradığınız kriterlere uygun soru bulunamadı.</h3>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-10 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-slate-400 text-sm italic">"İlim bir hazine, anahtarı ise sualdir."</p>
+            <div class="mt-4 flex justify-center gap-6">
+                <span class="text-xs text-slate-400">© 2024 İlm-i Hâl Rehberi</span>
+                <span class="text-xs text-slate-400">Tüm cevaplar fıkhi temel kaynaklarca özetlenmiştir.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('span:last-child');
+            
+            document.querySelectorAll('.faq-content').forEach(item => {
+                if (item !== content) {
+                    item.style.maxHeight = null;
+                    item.previousElementSibling.querySelector('span:last-child').textContent = '＋';
+                }
+            });
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                icon.textContent = '＋';
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                icon.textContent = '－';
+            }
+        }
+
+        function filterCategory(cat, event) {
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active-filter'));
+            event.target.classList.add('active-filter');
+
+            const items = document.querySelectorAll('.faq-item');
+            let found = false;
+
+            items.forEach(item => {
+                if (cat === 'all' || item.getAttribute('data-category') === cat) {
+                    item.style.display = 'block';
+                    found = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            document.getElementById('noResults').classList.toggle('hidden', found);
+        }
+
+        function filterSearch() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const items = document.querySelectorAll('.faq-item');
+            let found = false;
+
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(input)) {
+                    item.style.display = 'block';
+                    found = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            document.getElementById('noResults').classList.toggle('hidden', found);
+        }
+    </script>
+</body>
+</html>
