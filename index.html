@@ -6,7 +6,7 @@
     <title>SUFEM Fıkıh Portalı | Sultander</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
+   <style>
         :root { --sufem-red: #dc2626; --sufem-dark: #1e293b; }
         body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: var(--sufem-dark); }
         .sufem-logo-btn {
@@ -16,10 +16,17 @@
             padding: 10px 24px; border-radius: 12px; display: inline-block; transition: all 0.3s;
         }
         .verdict-tag { font-size: 0.7rem; font-weight: 800; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; margin-bottom: 12px; display: inline-block; }
+        
+        /* Mevcut Sınıflar */
         .caiz { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
         .haram { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
         .mekruh { background-color: #fef9c3; color: #854d0e; border: 1px solid #fef08a; }
         .vacip { background-color: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
+
+        /* Yeni Eklenen Sınıflar */
+        .farz { background-color: #ede9fe; color: #5b21b6; border: 1px solid #ddd6fe; } /* Mor tonları: Ciddiyet ve temel kural */
+        .sunnet { background-color: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; } /* Yeşil tonları: Maneviyat ve bereket */
+
         .faq-content { max-height: 0; overflow: hidden; transition: all 0.4s ease; opacity: 0; }
         .faq-item.active .faq-content { max-height: 1200px; opacity: 1; padding-bottom: 1.5rem; }
         .faq-item.active { border-color: var(--sufem-red); box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1); }
@@ -57,9 +64,10 @@
                 <button onclick="setFilter('necaset')" id="btn-necaset" class="cat-btn pagination-btn">Necaset</button>
                 <button onclick="setFilter('namaz')" id="btn-namaz" class="cat-btn pagination-btn">Namaz</button>
                 <button onclick="setFilter('kurban')" id="btn-kurban" class="cat-btn pagination-btn">Kurban</button>
+                <button onclick="setFilter('av')" id="btn-av" class="cat-btn pagination-btn">Av</button>
                 <button onclick="setFilter('oruç')" id="btn-oruç" class="cat-btn pagination-btn">Oruç</button>
                 <button onclick="setFilter('zekat')" id="btn-zekat" class="cat-btn pagination-btn">Zekat</button>
-
+                <button onclick="setFilter('umre')" id="btn-umre" class="cat-btn pagination-btn">Hac & Umre</button>
                 <button onclick="setFilter('finans')" id="btn-finans" class="cat-btn pagination-btn">Finans</button>
                 <button onclick="setFilter('ibadet')" id="btn-ibadet" class="cat-btn pagination-btn">İbadet & Temizlik</button>
                 <button onclick="setFilter('aile')" id="btn-aile" class="cat-btn pagination-btn">Aile & Yaşam</button>
@@ -162,7 +170,7 @@
             { c: 'namaz', s: 'Mekruh vakitlerde hangi namazlar kılınamaz?', v: 'haram', r: 'Farz, vacip, kaza, cenaze namazı veya tilavet secdesi yapılamaz; sadece o günün ikindi farzı kerahatle kılınabilir.' },
             { c: 'namaz', s: 'İkindi namazı kılındıktan sonra nafile namaz kılınabilir mi?', v: 'mekruh', r: 'İkindi farzı ile güneş batışı arasında nafile namaz kılmak mekruhtur; sadece kaza namazı kılınabilir.' },
             { c: 'namaz', s: 'Niyetin namazdaki önemi nedir?', v: 'vacip', r: 'Hangi namazın kılındığının kalben belirlenmesi şarttır; niyet edilmeden kılınan namaz geçersizdir.' },
-            
+
             // --- NAMAZ VE GÜNCEL HÜKÜMLER (5 SORU) ---
             { c: 'namaz', s: 'Vitir namazının 3. rekatında zamm-ı sure unutulursa ne yapılır?', v: 'vacip', r: 'Namaz geçerlidir ancak sehiv secdesi yapılması gerekir. Kasten terk edilirse namazın iadesi vacip olur.' },
             { c: 'teyemmüm', s: 'Bir teyemmümle birden fazla vakit namazı kılınabilir mi?', v: 'caiz', r: 'Evet. Abdesti bozan bir durum olmadıkça ve teyemmüm ruhsatı sürdükçe dilediği kadar namaz kılınabilir.' },
@@ -195,6 +203,81 @@
             { c: 'kurban', s: 'Birkaç kişinin Efendimiz (s.a.v.) ruhu için ortak kurban kesmesi caiz midir?', v: 'caiz', r: 'Küçükbaşta ortaklık olmaz. Ancak para toplanıp bir kişiye hibe edilirse, o kişi kendi adına kesip sevabını bağışlayabilir. Büyükbaşta 7 ortak olabilir.' },
             { c: 'kurban', s: 'Kurban için zenginlik sınırı (nisap) nedir?', v: 'vacip', r: 'Asli ihtiyaçlar dışında 96 gram altın değerinde malı olan mükelleftir. Mülkiyet şahsidir; ailede bu miktara sahip olan her fert ayrı ayrı kurban kesmelidir.' },
             { c: 'kurban', s: 'Kurban etlerinin tartılmadan paylaşılması caiz midir?', v: 'haram', r: 'Büyükbaş ortaklığında etlerin tartılarak eşit bölünmesi şarttır, aksi halde faiz şüphesi oluşur. Tartmadan bölüşmek ancak etler hiç taksim edilmeden dağıtılacaksa caizdir.' },
+            { c: 'kurban', s: 'Kurban ibadeti kimlere vaciptir ve zenginlik ölçüsü nedir?', v: 'vacip', r: 'Hür, mukim ve Müslüman olup temel ihtiyaçları dışında 96 gram altın değerinde malı olanlara vaciptir. Hanefîlere göre çocukların malından da kurban kesilir.' },
+            { c: 'kurban', s: 'Kurbanlık hayvanların yaş sınırları nelerdir?', v: 'vacip', r: 'Koyun/Keçi: 1 yaş (koyun 7-8 aylık ama 1 yaş gibi gösterişli ise olur). Sığır: 2 yaş. Deve: 5 yaşını bitirmiş olmalıdır.' },
+            { c: 'kurban', s: 'Bir hayvanı kaç kişi ortaklaşa kurban edebilir?', v: 'vacip', r: 'Koyun ve keçi sadece 1 kişi adına kesilir. Deve ve sığır ise 1 kişiden 7 kişiye kadar ortaklaşa kesilebilir; tüm ortaklar Müslüman ve ibadet niyetli olmalıdır.' },
+            { c: 'kurban', s: 'Hangi kusurlar hayvanın kurban edilmesine engeldir?', v: 'vacip', r: 'İki veya bir gözü kör, kulağı/kuyruğunun yarıdan fazlası kopuk, memesi kopmuş veya yürüyemeyecek kadar topal/zayıf olanlar kurban edilemez.' },
+            { c: 'kurban', s: 'Satın alınan kurbanlık hayvan ölürse veya kusurlanırsa ne yapılır?', v: 'caiz', r: 'Zengin ise yerine yenisini almalı; fakir ise o hayvan adak hükmünde olduğundan kusurlu haliyle kesebilir veya yenisini alması gerekmez.' },
+            { c: 'kurban', s: 'Kurban ne zaman kesilir ve bayram namazından önce kesilebilir mi?', v: 'vacip', r: 'Bayramın 1, 2 ve 3. günlerinde kesilebilir. Bayram namazı kılınan yerlerde namazdan önce kesilen kurban geçerli olmaz.' },
+            { c: 'kurban', s: 'Kurban keserken besmele çekmenin hükmü nedir?', v: 'vacip', r: '"Bismillahi Allahu Ekber" demek şarttır. Kasten terk edilirse et yenmez; unutularak terk edilirse helaldir.' },
+            { c: 'kurban', s: 'Kurban etinin ve postunun paylaşımı nasıl olmalıdır?', v: 'caiz', r: 'Etin üçte birinin fakirlere dağıtılması güzeldir. Postu sadaka verilmeli veya evde kullanılmalıdır; postun veya etin satılması mekruhtur.' },
+            { c: 'kurban', s: 'Akîka kurbanı nedir ve ne zaman kesilir?', v: 'caiz', r: 'Yeni doğan çocuk için şükür amacıyla kesilir. Doğumdan ergenliğe kadar kesilebilir; en faziletli vakti 7. gündür.' },
+            { c: 'kurban', s: 'İslami usullere göre hayvan kesimi (Zebh) nasıl yapılır?', v: 'vacip', r: 'Nefes ve yemek borusu ile iki ana damardan en az ikisinin kesilmesiyle olur. Keskin alet kullanılmalı, hayvan kıbleye çevrilmelidir.' },
+            { c: 'kurban', s: 'Kimlerin kestiği hayvanın eti helaldir?', v: 'caiz', r: 'Müslümanların ve Ehl-i Kitap (Yahudi/Hristiyan) olanların kestiği yenir. Ateist veya putperestlerin kestiği yenmez.' },
+            { c: 'kurban', s: 'Deniz canlılarından hangileri helaldir?', v: 'caiz', r: 'Balık türlerinin tamamı helaldir. Ancak balık dışındaki deniz canlıları (yengeç, midye, ıstakoz vb.) Hanefi mezhebine göre helal değildir.' },
+            { c: 'kurban', s: 'Hangi kara hayvanları ve kuşların eti haramdır?', v: 'haram', r: 'Azı dişli yırtıcılar, pençeli avcı kuşlar, haşerat (yılan, akrep) ve domuz eti haramdır.' },
+            { c: 'kurban', s: 'Celâle ne demektir ve hükmü nedir?', v: 'mekruh', r: 'Sadece pislik yiyen hayvandır. Kesilmeden önce temiz gıdayla beslenmelidir (Tavuk 3, koyun 4, sığır 10 gün).' },
+            { c: 'kurban', s: 'Helal kesilmiş hayvanın hangi kısımlarının yenmesi mekruhtur?', v: 'mekruh', r: 'Akıcı kan (haram), öd kesesi, idrar torbası, bezeler ve cinsel organların yenmesi mekruh görülmüştür.' },
+            { c: 'kurban', s: 'İslam hukukunda "meyte" (leş) ne anlama gelir ve hükmü nedir?', v: 'haram', r: 'Dini usullere uygun boğazlanmadan, kendi başına veya boğulma, düşme, darbe gibi etkilerle ölen hayvanlara denir. Etinin yenilmesi haramdır.' },
+            { c: 'kurban', s: 'Ağır yaralanmış bir hayvan ölmeden kesilirse eti helal olur mu?', v: 'caiz', r: 'Hayvanda hâlâ canlılık eseri (hareket, kan akışı vb.) varsa, Besmele ile kesilmesi durumunda eti helal olur.' },
+            { c: 'kurban', s: 'Hayvandan canlıyken kopan bir parçanın hükmü nedir?', v: 'haram', r: 'Hayvan henüz kesilmeden vücudundan ayrılan parça meyte hükmündedir ve yenilmesi caiz değildir.' },
+            { c: 'kurban', s: 'Boğazlanma şartından istisna tutulan hayvanlar hangileridir?', v: 'caiz', r: 'Balık ve çekirge, boğazlanmadan (kendiliğinden ölseler dahi) helal olan istisnai canlılardır.' },
+
+            // --- AVCILIK (SAYD) HÜKÜMLERİ ---
+            { c: 'av', s: 'Eğlence amaçlı avlanmanın fıkhi hükmü nedir?', v: 'mekruh', r: 'İhtiyaç (yiyecek, deri) veya zararlı hayvanı yok etmek için avlanmak caizdir. Ancak sadece zevk için avlanmak kalbi katılaştırdığı gerekçesiyle hoş görülmemiştir.' },
+            { c: 'av', s: 'Hangi hayvanlarla av yapmak caizdir?', v: 'caiz', r: 'Eğitimli köpek, doğan, pars, atmaca ve şahin ile av yapılabilir. Domuz, maymun veya eğitilemeyen vahşi hayvanlarla av caiz değildir.' },
+            { c: 'av', s: 'Bir avcı hayvanın (köpek vb.) "eğitilmiş" olduğu nasıl anlaşılır?', v: 'caiz', r: 'Salıverildikten sonra çağrıldığında geri dönmesi ve yakaladığı avı kendisinin yememesi gerekir.' },
+            { c: 'av', s: 'Avcı köpeğin yakaladığı avdan yemesi hükmü nasıl etkiler?', v: 'haram', r: 'Eğitimli köpek avdan yerse o hayvanın eğitilmemiş olduğu anlaşılır ve av haram olur. Ancak doğan ve şahin gibi kuşların yemesi helalliğe zarar vermez.' },
+            { c: 'av', s: 'Avda Besmele çekmenin kuralı nedir?', v: 'vacip', r: 'Silahı ateşlerken veya köpeği salarken Besmele çekilmelidir. Unutulursa helal, kasten terk edilirse haramdır.' },
+            { c: 'av', s: 'Avlanan hayvan canlı ele geçirilirse ne yapılmalıdır?', v: 'vacip', r: 'Hayvan canlı ele geçirilirse derhal usulüne uygun kesilmelidir; kesilmeden kendiliğinden ölürse eti yenmez.' },
+            { c: 'av', s: 'Kimlerin yaptığı avın eti yenir?', v: 'caiz', r: 'Müslüman veya Ehl-i Kitap (Yahudi/Hristiyan) olanların avı yenir. Putperest, Mecusi veya ihramlı Müslümanın avı yenmez.' },
+
+            // --- UMRE VE HAC İBADETİ (13 SORU) ---
+            { c: 'umre', s: 'Umre ne anlama gelir ve dini hükmü nedir?', v: 'sunnet', r: 'Sözlükte "ziyaret" anlamına gelir. Dini hükmü sünnet-i müekkede olup, ömürde en az bir defa yapılması kuvvetle tavsiye edilmiştir.' },
+            { c: 'umre', s: 'Umre ne zaman yapılabilir?', v: 'caiz', r: 'Yılın her zamanı yapılabilir. Ancak Arefe ve teşrîk günlerinde yapılması mekruh görülmüştür.' },
+            { c: 'umre', s: 'Umrenin temel rükünleri (farzları) nelerdir?', v: 'vacip', r: 'İhrama girmek, Kâbe’yi tavaf etmek, Safâ ile Merve arasında sa‘y yapmak ve tıraş olarak ihramdan çıkmaktır.' },
+            { c: 'umre', s: 'İhram nedir ve ihrama girince hangi yasaklar başlar?', v: 'vacip', r: 'Bazı helal fiillerin haram kılınmasıdır. Tıraş olmak, tırnak kesmek, koku sürünmek ve cinsel ilişki yasak olur.' },
+            { c: 'umre', s: 'Tavaf ve Sa‘y nasıl gerçekleştirilir?', v: 'vacip', r: 'Tavaf, Kâbe etrafında 7 defa dönmektir. Sa‘y, Safâ ile Merve arasında 7 defa yürümektir; Hz. Hacer’in su arayışını sembolize eder.' },
+            { c: 'umre', s: 'İhramdan çıkış işlemi nasıldır?', v: 'vacip', r: 'Erkekler saçlarını tamamen tıraş eder veya kısaltır; kadınlar ise saçlarını bir parmak ucu kadar keserek ihramdan çıkarlar.' },
+            { c: 'umre', s: 'İhrama girmeden önce yapılması gereken sünnetler nelerdir?', v: 'sunnet', r: 'Gusül abdesti almak, vücuda güzel koku sürünmek (elbiseye değil) ve dikişsiz beyaz ihram elbiselerini giymek sünnettir.' },
+            { c: 'umre', s: 'Telbiye nedir ve nasıl söylenir?', v: 'sunnet', r: '"Lebbeyk Allâhumme Lebbeyk..." duasıdır. İhrama girerken samimiyetle ve sesli olarak söylenmesi sünnettir.' },
+            { c: 'umre', s: 'Tavaf ve sa‘y esnasında erkeklere özel "remel" ve "hervele" nedir?', v: 'sunnet', r: 'Remel: Tavafın ilk 3 şavtında omuzları açıp hızlı yürümek. Hervele: Sa‘y sırasında yeşil direkler arasında koşmaktır.' },
+            { c: 'umre', s: 'Haccın hükmü nedir ve hangi aylarda yapılır?', v: 'farz', r: 'Gücü yeten Müslümanlara farzdır. Hac ayları; Şevvâl, Zilkade ve Zilhicce ayının ilk on günüdür.' },
+            { c: 'umre', s: 'İfrad haccı nedir ve diğerlerinden farkı nedir?', v: 'farz', r: 'Sadece hac niyetiyle yapılan hacdır. Umre dahil değildir; bu hac türünde kurban kesme zorunluluğu yoktur.' },
+            { c: 'umre', s: 'Temettü haccı nasıl yapılır ve kimler tercih eder?', v: 'farz', r: 'Önce umre yapıp ihramdan çıkılan, sonra hac için tekrar ihrama girilen hacdır. Genellikle uzak ülkelerden gelenler tercih eder.' },
+            { c: 'umre', s: 'Temettü haccı hangi aşamalardan oluşur?', v: 'farz', r: 'İki bölümden oluşur: Önce umre yapılıp ihramdan çıkılır. Ardından Zilhicce’nin 8. günü hac için yeniden ihrama girilerek hac görevleri eda edilir.' },
+            { c: 'umre', s: 'Kıran haccı nedir ve kimler yapabilir?', v: 'farz', r: 'Hac ve umrenin tek ihramla birleştirilmesidir. Sadece mikat dışından gelen âfâkî hacılar yapabilir; Mekke sakinleri yapamaz.' },
+            { c: 'umre', s: 'Temettü haccında kurban kesemeyen kişi ne yapmalıdır?', v: 'vacip', r: 'Arefe gününe kadar 3 gün, memlekete döndükten sonra ise 7 gün olmak üzere toplam 10 gün oruç tutmalıdır.' },
+            { c: 'umre', s: 'Hangi hac türlerinde şükür kurbanı (hedy) kesmek vaciptir?', v: 'vacip', r: 'Temettü ve Kıran haccı yapanların kurban kesmesi vaciptir. İfrad haccında zorunluluk yoktur.' },
+            { c: 'umre', s: 'Ceza ve kefaret kurbanlarının etinden sahibi yiyebilir mi?', v: 'haram', r: 'Şükür kurbanından yiyebilir; ancak ihlal nedeniyle kesilen ceza ve kefaret kurbanlarından sahibi ve ailesi yiyemez.' },
+            { c: 'umre', s: 'İhramda "Dem" (koyun/keçi) gerektiren yasaklar nelerdir?', v: 'vacip', r: 'Koku sürmek, tam gün dikişli elbise giymek, tırnak kesmek veya saçın 1/4’ünü tıraş etmek koyun/keçi kurban etmeyi gerektirir.' },
+            { c: 'umre', s: 'Hangi durumlarda "Bedene" (deve/sığır) kurbanı kesilmelidir?', v: 'vacip', r: 'Arafat’tan sonra ama tıraştan önce cinsel ilişkide bulunmak veya ziyaret tavafını cünüp/hayızlıyken yapmak büyükbaş kurbanı gerektirir.' },
+            { c: 'umre', s: 'Hangi hayvanların öldürülmesinde ihram cezası yoktur?', v: 'caiz', r: 'Yılan, akrep, kurt, fare ve sinek gibi zararlı hayvanların öldürülmesinde ceza öngörülmemiştir.' },
+            { c: 'umre', s: 'Harem bölgesindeki bitkilerin koparılması yasak mıdır?', v: 'haram', r: 'Kendiliğinden yetişen ağaç ve yeşil otları koparmak yasaktır. Ancak izhir otu, mantar ve ekili ürünler bu yasağın dışındadır.' }, 
+            { c: 'umre', s: 'Hangi durumda hac tamamen bozulur ve kaza gerekir?', v: 'farz', r: 'Arafat vakfesinden önce cinsel ilişki haccı bozar. Ertesi yıl kaza edilmeli ve ayrıca kurban kesilmelidir.' },
+            { c: 'umre', s: 'Veda tavafını terk etmenin hükmü nedir?', v: 'vacip', r: 'Veda tavafı vaciptir; mazeretsiz terk edilmesi durumunda "dem" (kurban) gerekir.' },
+            { c: 'umre', s: 'Bedel haccı nedir ve temel şartları nelerdir?', v: 'farz', r: 'Kalıcı sağlık sorunu olanın yerine başkasını göndermesidir. Haccın âmire farz olması, kalıcı mazeret (hastalık/yaşlılık), açık vekalet ve masrafların âmirce karşılanması şarttır.' },
+            { c: 'umre', s: 'Nafile (farz olmayan) hac için bedel gönderilebilir mi?', v: 'caiz', r: 'Evet. Kişi gücü yetsin veya yetmesin, nafile hac için kendi yerine bir vekil gönderebilir; sevabı doğrudan gönderene yazılır.' },
+            { c: 'umre', s: 'Bedel haccı yapan kişiye (naib) ücret verilebilir mi?', v: 'haram', r: 'Hac bir ibadettir, ücret karşılığı yaptırılamaz. Ancak naibin yol, yemek ve konaklama gibi zaruri giderlerinin karşılanması caizdir.' },
+            { c: 'umre', s: 'Naib, vekalet görevini bir başkasına devredebilir mi?', v: 'haram', r: 'Hayır. Âmir tarafından açıkça izin verilmedikçe naib, haccı bizzat kendisi yerine getirmelidir; başkasına devredemez.' },
+            { c: 'umre', s: 'Âmirin belirlediği hac türünden (İfrad, Temettü vb.) farklı bir hac yapılması hükmü nedir?', v: 'haram', r: 'Naib, âmirin şart koştuğu hac türünü aynen uygulamalıdır. Talimat dışına çıkıp farklı bir tür yaparsa bedel haccı geçersiz olur.' },
+            { c: 'umre', s: 'Naibin ihram yasaklarını çiğnemesi durumunda masrafların iadesi gerekir mi?', v: 'vacip', r: 'Arafat öncesi cinsel ilişkiyle hac bozulursa tüm masraflar iade edilmelidir. Arafat sonrası ihlallerde ise sadece ceza kurbanı gerekir, masraflar iade edilmez.' },
+            { c: 'umre', s: 'Hacı adayı hac yolunda vefat ederse hükmü ne olur?', v: 'caiz', r: 'Farz olduğu yıl yola çıkıp ulaşamadan ölürse vasiyete gerek kalmadan sevabını alır. Ancak kasten geciktirip vasiyet etmeden ölürse günahkâr sayılır.' },
+            { c: 'umre', s: 'Bedel haccı nereden (hangi şehirden) başlatılmalıdır?', v: 'vacip', r: 'İmam-ı Âzam’a göre bedel haccı mutlaka kişinin kendi memleketinden (vatanından) başlatılmalıdır.' },
+            { c: 'umre', s: 'Kadınların bedel olarak hacca gitmesinin hükmü nedir?', v: 'mekruh', r: 'Gidebilirler ancak yanlarında bir mahrem erkek bulunması ve eş izni şarttır. Yol meşakkatleri sebebiyle mekruh görülmüştür.' },
+            { c: 'umre', s: 'Evlatların anne-babası adına kendi istekleriyle (vekaletsiz) yaptığı hac niyabet sayılır mı?', v: 'sunnet', r: 'Hayır, bu niyabet değil nafile amel sayılır. Kişi haccı kendi adına yapmış olur ancak sevabını ebeveynine bağışlar.' },
+            { c: 'umre', s: 'Hac sonrası artan paranın hükmü nedir?', v: 'vacip', r: 'Naib artan parayı âmire iade etmelidir. Ancak âmir "artan senin olsun" diye önceden izin verdiyse kendine alabilir.' },
+            { c: 'umre', s: '"Allah için hac edeyim" şeklinde adakta bulunmanın hükmü nedir?', v: 'farz', r: 'Bu niyet mutlak adak sayılır ve kişinin bu haccı yerine getirmesi artık farz olur.' },
+            { c: 'umre', s: 'Şarta bağlı hac adağında şart gerçekleşirse ne yapılmalıdır?', v: 'vacip', r: '"İşim olursa hac edeyim" gibi bir adakta, iş gerçekleştiğinde hac yapmak gerekir; sadece yemin kefaretiyle bu yükümlülük düşmez.' },
+            { c: 'umre', s: 'Yürüyerek hacca gitmeyi adayan birinin uyması gereken kurallar nelerdir?', v: 'vacip', r: 'Gücü yetiyorsa evinden veya ihram mahallinden itibaren yürüyerek gitmelidir. Tavaftan önce vasıtaya binerse kurban kesmesi gerekir.' },
+            { c: 'umre', s: 'Fıkıhta "İhsar" ne anlama gelir?', v: 'caiz', r: 'Hac veya umre yolunda düşman, hastalık veya mahremin vefatı gibi bir engelle karşılaşarak ibadetin tamamlanamaması durumudur.' },
+            { c: 'umre', s: 'Hac yolunda engellenen (muhsar) bir kişi ihramdan nasıl çıkar?', v: 'vacip', r: 'Temel çözüm yolu kurban kesmektir (İhsar demî). Bu kurban Harem bölgesine gönderilir; kesildiğinde kişi ihramdan çıkar.' },
+            { c: 'umre', s: 'Kıran haccına niyet edip yolda engellenen birinin yükümlülüğü nedir?', v: 'vacip', r: 'Hem hac hem umre niyeti olduğu için iki kurban kesmelidir. Engel kalktığında ise bir hac ve iki umre kaza etmesi gerekir.' },
+            { c: 'umre', s: 'Vakfeden sonra tavaftan engellenen biri muhsar sayılır mı?', v: 'caiz', r: 'Hayır, Arafat vakfesi yapıldığı için haccı sabit olur. Muhsar sayılmaz ancak tavafı yapamadığı için haccı eksik kalır.' },
+            { c: 'umre', s: 'Peygamber Efendimiz’in (s.a.v.) kabrini ziyaret etmenin hükmü nedir?', v: 'sunnet', r: 'Müslümanlar için olağanüstü faziletli bir ameldir. Alimler haccın ardından günahlardan arınmış olarak ziyareti tavsiye ederler.' },
+            { c: 'umre', s: 'Kabr-i Şerif önünde selamlama sırası nasıl olmalıdır?', v: 'sunnet', r: 'Önce Peygamber Efendimiz (s.a.v.), ardından sırasıyla Hz. Ebû Bekir ve Hz. Ömer ziyaret edilerek selam verilir.' },
+            { c: 'umre', s: 'Kuba Mescidi’ni ziyaret etmenin hükmü nedir?', v: 'sunnet', r: 'Peygamberimiz’in her cumartesi gidip namaz kıldığı bir yerdir; Medine’de ziyaret edilmesi tavsiye edilen önemli yerlerin başındadır.' },
+            { c: 'umre', s: 'Medine’den ayrılırken ne yapılması tavsiye edilir?', v: 'sunnet', r: 'Mescid-i Nebevî’de iki rekât veda namazı kılınmalı, dua ve salavatlarla şehre veda edilmelidir.' },
 
             // --- İBADET VE SAĞLIK (6 SORU) ---
             { c: 'gusül', s: 'Kulakları delik olan bir kişi küpe takmadan abdest ve gusül alabilir mi?', v: 'caiz', r: 'Gusülde suyun deliklere ulaşması gerekir. Sürekli küpe takmak şart değildir; suyun ulaştığına kanaat getirmek için ovalamak yeterlidir.' },
