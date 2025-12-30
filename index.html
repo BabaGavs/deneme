@@ -22,8 +22,6 @@
         .haram { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
         .mekruh { background-color: #fef9c3; color: #854d0e; border: 1px solid #fef08a; }
         .vacip { background-color: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
-
-        /* Yeni Eklenen Sınıflar */
         .farz { background-color: #ede9fe; color: #5b21b6; border: 1px solid #ddd6fe; } /* Mor tonları: Ciddiyet ve temel kural */
         .sunnet { background-color: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; } /* Yeşil tonları: Maneviyat ve bereket */
 
@@ -33,6 +31,37 @@
         .pagination-btn { padding: 8px 16px; border-radius: 8px; font-weight: bold; transition: all 0.2s; border: 1px solid #e2e8f0; }
         .pagination-btn.active { background-color: var(--sufem-red); color: white; border-color: var(--sufem-red); }
         .cat-btn.active { background-color: var(--sufem-red); color: white; }
+       
+        /* Erguvan rengi ve aktif durum etkileşimi */
+        .faq-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            align-self: start; 
+            border-radius: 1rem; /* Kartların köşelerini yumuşatmak için eklenebilir */
+        }
+
+        .faq-item:hover {
+            border-color: #a855f7; 
+            background-color: #faf5ff; 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.1);
+        }
+
+        .faq-item.active { 
+            border-color: #9333ea !important; 
+            background-color: #f5f3ff !important;
+            box-shadow: 0 10px 15px -3px rgba(147, 51, 234, 0.2);
+        }
+
+        .faq-item.active .text-slate-700,
+        .faq-item:hover .text-slate-700 { 
+            color: #7e22ce; 
+        }
+          
+}
+.faq-item.active .text-slate-700 { color: #4338ca; } /* Soru metni rengi */
     </style>
 </head>
 <body class="antialiased">
@@ -73,7 +102,7 @@
                 <button onclick="setFilter('aile')" id="btn-aile" class="cat-btn pagination-btn">Aile & Yaşam</button>
             </div>
         </div>
-        <div id="faqContainer" class="grid gap-3"></div>
+        <div id="faqContainer" class="grid gap-4 md:grid-cols-2 items-start"></div>
         <div id="pagination" class="flex justify-center gap-2 mt-8"></div>
     </main>
 
@@ -366,7 +395,7 @@
         let currentPage = 1;
         const perPage = 15;
 
-        function renderFAQ() {
+function renderFAQ() {
             const container = document.getElementById('faqContainer');
             const start = (currentPage - 1) * perPage;
             const end = start + perPage;
@@ -390,13 +419,51 @@
             const nav = document.getElementById('pagination');
             const totalPages = Math.ceil(filteredData.length / perPage);
             nav.innerHTML = '';
-            for (let i = 1; i <= totalPages; i++) {
-                const btn = document.createElement('button');
-                btn.innerText = i;
-                btn.className = `pagination-btn ${i === currentPage ? 'active' : ''}`;
-                btn.onclick = () => { currentPage = i; renderFAQ(); window.scrollTo(0,0); };
-                nav.appendChild(btn);
+
+            if (totalPages <= 1) return;
+
+            let pages = [];
+            let start = Math.max(1, currentPage - 2);
+            let end = Math.min(totalPages, start + 4);
+
+            if (end - start < 4) {
+                start = Math.max(1, end - 4);
             }
+
+            if (start > 1) {
+                pages.push(1);
+                if (start > 2) pages.push('...');
+            }
+
+            for (let i = start; i <= end; i++) {
+                if (i > 0 && i <= totalPages) {
+                    pages.push(i);
+                }
+            }
+
+            if (end < totalPages) {
+                if (end < totalPages - 1) pages.push('...');
+                pages.push(totalPages);
+            }
+
+            pages.forEach(p => {
+                if (p === '...') {
+                    const span = document.createElement('span');
+                    span.innerText = '...';
+                    span.className = 'px-3 py-2 text-slate-400 font-bold';
+                    nav.appendChild(span);
+                } else {
+                    const btn = document.createElement('button');
+                    btn.innerText = p;
+                    btn.className = `pagination-btn ${p === currentPage ? 'active' : ''}`;
+                    btn.onclick = () => {
+                        currentPage = p;
+                        renderFAQ();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    };
+                    nav.appendChild(btn);
+                }
+            });
         }
 
         function handleSearch(val) {
@@ -408,7 +475,8 @@
 
         function setFilter(cat) {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-' + cat).classList.add('active');
+            const btn = document.getElementById('btn-' + cat);
+            if(btn) btn.classList.add('active');
             filteredData = cat === 'all' ? [...allData] : allData.filter(d => d.c === cat);
             currentPage = 1;
             renderFAQ();
@@ -416,11 +484,8 @@
 
         function toggleFaq(btn) {
             const item = btn.closest('.faq-item');
-            const wasActive = item.classList.contains('active');
-            document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('active'));
-            if (!wasActive) item.classList.add('active');
+            item.classList.toggle('active');
         }
-
         renderFAQ();
     </script>
 </body>
