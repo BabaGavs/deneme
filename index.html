@@ -57,6 +57,9 @@
                 <button onclick="setFilter('necaset')" id="btn-necaset" class="cat-btn pagination-btn">Necaset</button>
                 <button onclick="setFilter('namaz')" id="btn-namaz" class="cat-btn pagination-btn">Namaz</button>
                 <button onclick="setFilter('kurban')" id="btn-kurban" class="cat-btn pagination-btn">Kurban</button>
+                <button onclick="setFilter('oruç')" id="btn-oruç" class="cat-btn pagination-btn">Oruç</button>
+                <button onclick="setFilter('zekat')" id="btn-zekat" class="cat-btn pagination-btn">Zekat</button>
+
                 <button onclick="setFilter('finans')" id="btn-finans" class="cat-btn pagination-btn">Finans</button>
                 <button onclick="setFilter('ibadet')" id="btn-ibadet" class="cat-btn pagination-btn">İbadet & Temizlik</button>
                 <button onclick="setFilter('aile')" id="btn-aile" class="cat-btn pagination-btn">Aile & Yaşam</button>
@@ -159,6 +162,13 @@
             { c: 'namaz', s: 'Mekruh vakitlerde hangi namazlar kılınamaz?', v: 'haram', r: 'Farz, vacip, kaza, cenaze namazı veya tilavet secdesi yapılamaz; sadece o günün ikindi farzı kerahatle kılınabilir.' },
             { c: 'namaz', s: 'İkindi namazı kılındıktan sonra nafile namaz kılınabilir mi?', v: 'mekruh', r: 'İkindi farzı ile güneş batışı arasında nafile namaz kılmak mekruhtur; sadece kaza namazı kılınabilir.' },
             { c: 'namaz', s: 'Niyetin namazdaki önemi nedir?', v: 'vacip', r: 'Hangi namazın kılındığının kalben belirlenmesi şarttır; niyet edilmeden kılınan namaz geçersizdir.' },
+            
+            // --- NAMAZ VE GÜNCEL HÜKÜMLER (5 SORU) ---
+            { c: 'namaz', s: 'Vitir namazının 3. rekatında zamm-ı sure unutulursa ne yapılır?', v: 'vacip', r: 'Namaz geçerlidir ancak sehiv secdesi yapılması gerekir. Kasten terk edilirse namazın iadesi vacip olur.' },
+            { c: 'teyemmüm', s: 'Bir teyemmümle birden fazla vakit namazı kılınabilir mi?', v: 'caiz', r: 'Evet. Abdesti bozan bir durum olmadıkça ve teyemmüm ruhsatı sürdükçe dilediği kadar namaz kılınabilir.' },
+            { c: 'namaz', s: 'Hafızın namazda hatırlamak için mushafa bakması namazı bozar mı?', v: 'caiz', r: 'Ezbere bilen birinin bakması bozmaz. Ancak ezber bilmeyenin mushaftan okuması Ebu Hanife\'ye göre namazı bozar.' },
+            { c: 'finans', s: 'Altın borcu TL olarak güncel kurla ödenebilir mi?', v: 'caiz', r: 'Zimmetteki altın miktarı baki kalmak şartıyla, her taksit anındaki güncel altın kuru üzerinden TL olarak ödeme yapılabilir.' },
+            { c: 'aile', s: '"Tesettüre girersen seni boşarım" diyen kocaya itaat gerekir mi?', v: 'haram', r: 'Tesettür Allah’ın emridir. Yaratana isyan olan yerde kula itaat olmaz; kadın dini vecibelerini yerine getirmelidir.' },
 
             // --- NAMAZIN RÜKÜNLERİ VE UYGULANIŞI (14 SORU) ---
             { c: 'namaz', s: 'Ayakta duramayan hastalar namazını nasıl kılar?', v: 'caiz', r: 'Ayakta duramayan veya hastalığı artacak olanlar oturarak kılar. Bir yere dayanarak ayakta durabiliyorsa oturması caiz değildir; gücü yettiği kadar ayakta durup kalanı oturarak tamamlamalıdır.' },
@@ -192,6 +202,14 @@
             { c: 'teyemmüm', s: 'Teyemmümde nesnenin büyüklüğü önemli midir?', v: 'caiz', r: 'Belirli bir ölçü yoktur; tozun veya toprak cinsinin uzuvlara (yüz ve kollar) ulaşması yeterlidir.' },
             { c: 'namaz', s: 'Öğle ve ikindi namazlarında neden sessiz (hafi) kıraat yapılır?', v: 'vacip', r: 'Bu durum "taabbudi"dir; yani Allah öyle emrettiği için yapılır. Asıl gerekçe teslimiyettir.' },
             { c: 'ibadet', s: 'Organ bağışı caiz midir?', v: 'caiz', r: 'Canlıdan canlıya (zarar vermeme şartıyla) caizdir. Ancak kalbin hala attığı "tıbbi ölüm" sonrası nakle fıkhen cevaz verilmez.' },
+
+            // --- ORUÇ VE RAMAZAN MESELELERİ (6 SORU) ---
+            { c: 'oruç', s: 'Oruca niyet ettikten sonra imsak vaktine kadar yemek yenilebilir mi?', v: 'caiz', r: 'Evet. Orucun başlama vakti imsaktır. Niyetin akşamdan yapılmış olması imsak vaktine kadar yemeye engel değildir.' },
+            { c: 'oruç', s: 'Oruçluyken diş fırçalamak veya ağzı tuzlu suyla çalkalamak orucu bozar mı?', v: 'mekruh', r: 'Ağzı çalkalamak bozmaz ancak boğaza su kaçarsa bozulur. Macunlu fırçalama yutulma riski nedeniyle riskli kabul edilir.' },
+            { c: 'oruç', s: 'Saç kesimi sırasında ağıza saç kaçması veya yutulması orucu bozar mı?', v: 'caiz', r: 'Kasıtsız kaçan zerreler bozmaz. Ancak ağıza kaçan bir kılın yutulması orucu bozar; bu durumda kefaret gerekmez, sadece kaza gerekir.' },
+            { c: 'oruç', s: 'Şiddetli ağrı nedeniyle oruç bozulursa 61 gün kefaret gerekir mi?', v: 'caiz', r: 'Hayır. Sağlık mazeretiyle bozulan oruç günah sayılmaz; sadece bayramdan sonra günü gününe kaza yapılır.' },
+            { c: 'oruç', s: 'Merhem sürmek veya insülin iğnesi yaptırmak orucu bozar mı?', v: 'mekruh', r: 'Açık yara yoksa merhem bozmaz. İnsülin iğnesi ise Hanefi mezhebinde tercih edilen görüşe göre orucu bozar; kaza tavsiye edilir.' },
+            { c: 'oruç', s: 'Oruçlu olduğunu unutarak tırnak yemek orucu bozar mı?', v: 'caiz', r: 'Unutarak yemek/içmek gibi tırnak yemek de bozmaz. Ancak hatırlandığı halde dalgınlıkla yutulursa kaza gerekir.' },
            
             // --- FİNANS ---
             { c: 'finans', s: 'Emlak Katılım sistemi caiz midir?', v: 'caiz', r: 'Mülk ortaklığı esasına dayandığı için fıkhen caizdir.' },
@@ -201,7 +219,7 @@
             { c: 'finans', s: 'TOKİ projeleri caiz midir?', v: 'caiz', r: 'Enflasyon sınırı maddesi eklendiği için artık caiz görülmektedir.' },
             { c: 'finans', s: 'Banka promosyonu öğrenciye verilir mi?', v: 'mekruh', r: 'Özel banka ise sadece ihtiyaç sahibi fakire verilmelidir.' },
             { c: 'finans', s: 'Vade farkı faiz midir?', v: 'caiz', r: 'Taksitli fiyat farkı faiz değildir, alışveriş caizdir.' },
-            { c: 'finans', s: 'Tasarrufa dayalı birikime zekat gerekir mi?', v: 'vacip', r: 'Ticari alacak hükmündedir, zekat verilmelidir.' },
+            { c: 'zekat', s: 'Tasarrufa dayalı birikime zekat gerekir mi?', v: 'vacip', r: 'Ticari alacak hükmündedir, zekat verilmelidir.' },
             { c: 'finans', s: 'Hac farz olur mu (Mülk var ama gelir yok)?', v: 'caiz', r: 'Oturduğu ev dışında imkanı olmayana hac farz değildir.' },
             { c: 'finans', s: 'Karides yemenin hükmü nedir?', v: 'mekruh', r: 'Hanefi’de tahrimen mekruh, Şafi’de ise caizdir.' },
             { c: 'kurban', s: 'Kredi kartı ile kurban kesmek?', v: 'caiz', r: 'Gecikme faizine düşmemek şartıyla caizdir.' },
@@ -210,6 +228,13 @@
             { c: 'finans', s: 'Banka faiziyle geçinen birinin ikramını yemek caiz midir?', v: 'mekruh', r: 'Kazancının tamamı faiz olanın ikramı kabul edilmemelidir. Başka geliri olmayan bir eş, sadece zaruret miktarında bu kazançtan faydalanabilir.' },
             { c: 'finans', s: 'Katılım bankalarındaki özel fon havuzları caiz midir?', v: 'caiz', r: 'Vade uyumlu (gerçek ticaret süresiyle örtüşen) ve fıkıh kurullarının onayladığı özel fon havuzlarından kâr payı almak caizdir.' },
             { c: 'finans', s: 'Kıdem tazminatı almak helal midir?', v: 'caiz', r: 'İşveren rızasıyla veriyorsa veya iş akdinde bu hak varsa örfen caizdir. Ancak yüz kızartıcı suç işleyen veya sebepsiz ayrılanın talep etmesi doğru değildir.' },
+
+            // --- ZEKAT VE MALİ HÜKÜMLER (6 SORU) ---
+            { c: 'zekat', s: 'Zekat için kabul edilen güncel altın nisap miktarı nedir?', v: 'vacip', r: 'Tarihsel farklı rakamlar olsa da Osmanlıdan beri fakir lehine çoğunlukla 96 gram altın nisabı kabul edilmektedir.' },
+            { c: 'zekat', s: 'Zekat kimlere verilebilir? (Kardeş, damat vb.)', v: 'caiz', r: 'Anne, baba, çocuk ve toruna verilemez. Ancak ihtiyaç sahibi olan kardeş, yeğen, damat ve gelin zekat alabilir.' },
+            { c: 'zekat', s: 'Zekat hesaplanırken uzun vadeli (10 yıllık kredi vb.) borçlar düşülür mü?', v: 'caiz', r: 'Hanefi mezhebine göre vadesi ne kadar uzun olursa olsun tüm borçlar mal varlığından düşülür; kalan kısım nisaba ulaşırsa zekat verilir.' },
+            { c: 'zekat', s: 'Muhtacın haberi olmadan kira borcu zekat niyetiyle ödenebilir mi?', v: 'haram', r: 'Hayır. Zekatta temlik (mülk verme) şarttır. Borçlunun izni veya vekaleti olmadan borç ödenmesi zekat yerine geçmez.' },
+            { c: 'zekat', s: 'Üretimde kullanılan hammaddelerin (fermuar, düğme vb.) zekatı nasıl verilir?', v: 'vacip', r: 'Bu malzemeler ticari maldır. Zekat dönemindeki reel (güncel piyasa) değerleri üzerinden hesaplanıp listeye dahil edilmelidir.' },
            
             // --- MALİ VE TİCARİ MESELELER (6 SORU) ---
             { c: 'finans', s: 'Devletin sunduğu karşılıksız hibe hayvan yardımı alınabilir mi?', v: 'caiz', r: 'Kriterlere gerçekten sahip olunması ve yalan beyanda bulunulmaması şartıyla caizdir. Aksi durum kamu hakkına (kul hakkı) girer.' },
