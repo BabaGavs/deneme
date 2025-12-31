@@ -60,6 +60,47 @@
         .faq-item:hover .text-slate-700 { 
             color: #7e22ce; 
         }
+        /* Sidebar Kategori Butonları */
+.cat-btn {
+    width: 100%;
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: left;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: #fdfafb; /* Erguvanımsı çok açık gri */
+    color: #63223C;
+    border: 1px solid #f3e8ee;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Üzerine gelince (Hover) */
+.cat-btn:hover {
+    background-color: #f7ebf0;
+    border-color: #63223C;
+    transform: translateX(6px); /* Sağa hafif kayma efekti */
+}
+
+/* Seçili olan (Aktif) Buton */
+.cat-btn.active {
+    background-color: #63223C !important;
+    color: white !important;
+    border-color: #63223C;
+    box-shadow: 0 8px 16px rgba(99, 34, 60, 0.15);
+}
+
+/* Masaüstünde Sidebar'ın sabit kalması için */
+@media (min-width: 768px) {
+    .sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 2rem;
+    }
+}
           
 }
 .faq-item.active .text-slate-700 { color: #4338ca; } /* Soru metni rengi */
@@ -67,52 +108,110 @@
 </head>
 <body class="antialiased">
 
-    <header class="bg-white border-b border-slate-200 py-6 sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="cursor-pointer" onclick="window.location.reload()">
-                <div class="sufem-logo-btn flex items-center gap-3">
-                <div class="bg-red-600 p-2 rounded-lg text-white">
-                <i data-lucide="book-open-check" class="w-6 h-6"></i>
+    <header class="flex justify-between items-center mb-8 bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+    <div class="flex items-center gap-4">
+        <div class="sufem-logo-btn flex items-center gap-3 cursor-pointer" onclick="window.location.reload()">
+            
+            <div class="w-16 h-16 flex items-center justify-center">
+                <img src="https://i.ibb.co/kVg5Jg69/logo-yeni.png" 
+                     alt="SUFEM Logo" 
+                     class="w-full h-full object-contain drop-shadow-sm"
+                     onerror="this.src='https://i.ibb.co/XfXfGzBq/93Bdw9Vs.png'">
             </div>
-                <h1 class="text-3xl font-black text-slate-700 tracking-tighter">SUFEM</h1>
+            
+            <h1 class="text-4xl font-black text-slate-800 tracking-tighter">SUFEM</h1>
         </div>
-            <div class="text-center md:text-right">
-                <h2 class="text-lg font-bold text-slate-800 tracking-tight">Sultander Fıkıh İhtisas Eğitim Merkezi</h2>
-                <p class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Fetva ve Fıkhi Araştırmalar Portalı</p>
-            </div>
-        </div>
-    </header>
+        
+    <div class="hidden md:block h-12 w-px bg-slate-200 mx-2"></div>
+    
+    <div class="text-left hidden md:block">
+        <h2 class="text-lg font-bold text-slate-700 leading-tight uppercase tracking-tight">
+            Sultander Fıkıh İhtisas Eğitim Merkezi
+        </h2>
+        <p class="text-xs font-semibold text-red-600 tracking-widest mt-1 uppercase">
+            FETVA VE FIKHİ ARAŞTIRMALAR PORTALI
+        </p>
+    </div>
+</div>
+
+    <div class="flex gap-3">
+        <a href="https://www.instagram.com/sultander_" target="_blank" class="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all border border-slate-100">
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+        </a>
+        <a href="https://www.youtube.com/@sultandernegii" target="_blank" class="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all border border-slate-100">
+            <i data-lucide="youtube" class="w-5 h-5"></i>
+        </a>
+    </div>
+</header>
 
     <main class="max-w-5xl mx-auto px-4 py-8">
-        <div class="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm mb-8">
-            <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Fetva içinde ara..." class="w-full p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl outline-none mb-6">
-            <div class="flex flex-wrap gap-2">
-                <button onclick="setFilter('all')" id="btn-all" class="cat-btn active pagination-btn">Tümü</button>
-                <button onclick="setFilter('sular')" id="btn-sular" class="cat-btn pagination-btn">Sular</button>
-                <button onclick="setFilter('abdest')" id="btn-abdest" class="cat-btn pagination-btn">Abdest</button>
-                <button onclick="setFilter('mesh')" id="btn-mesh" class="cat-btn pagination-btn">Mesh</button>
-                <button onclick="setFilter('teyemmüm')" id="btn-teyemmüm" class="cat-btn pagination-btn">Teyemmüm</button>
-                <button onclick="setFilter('gusül')" id="btn-gusül" class="cat-btn pagination-btn">Gusül</button>
-                <button onclick="setFilter('necaset')" id="btn-necaset" class="cat-btn pagination-btn">Necaset</button>
-                <button onclick="setFilter('namaz')" id="btn-namaz" class="cat-btn pagination-btn">Namaz</button>
-                <button onclick="setFilter('kurban')" id="btn-kurban" class="cat-btn pagination-btn">Kurban</button>
-                <button onclick="setFilter('av')" id="btn-av" class="cat-btn pagination-btn">Av</button>
-                <button onclick="setFilter('oruç')" id="btn-oruç" class="cat-btn pagination-btn">Oruç</button>
-                <button onclick="setFilter('zekat')" id="btn-zekat" class="cat-btn pagination-btn">Zekat</button>
-                <button onclick="setFilter('umre')" id="btn-umre" class="cat-btn pagination-btn">Hac & Umre</button>
-                <button onclick="setFilter('finans')" id="btn-finans" class="cat-btn pagination-btn">Finans</button>
-                <button onclick="setFilter('ibadet')" id="btn-ibadet" class="cat-btn pagination-btn">İbadet & Temizlik</button>
-                <button onclick="setFilter('aile')" id="btn-aile" class="cat-btn pagination-btn">Aile & Yaşam</button>
-            </div>
+        <div class="relative max-w-2xl mx-auto mb-12 group">
+    <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+        <i data-lucide="search" class="w-5 h-5 text-slate-400 group-focus-within:text-red-600 transition-colors"></i>
+    </div>
+    <div class="flex items-center bg-white rounded-2xl shadow-xl shadow-slate-200/50 border-2 border-transparent focus-within:border-red-600 transition-all overflow-hidden p-1">
+        <input 
+            type="text" 
+            id="search-input"
+            class="block w-full pl-12 pr-4 py-4 text-slate-700 placeholder-slate-400 focus:outline-none text-lg" 
+            placeholder="Merak ettiğiniz bir konuyu yazın..."
+        >
+        <button 
+            onclick="performSearch()"
+            class="bg-red-600 hover:bg-red-700 text-white px-8 py-3.5 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg shadow-red-200 active:scale-95"
+        >
+            <span>Fetva Ara</span>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+        </button>
+    </div>
+</div>
+        <main class="max-w-7xl mx-auto px-4 pb-20">
+    <div class="relative max-w-2xl mx-auto mb-12 group">
         </div>
-        <div id="faqContainer" class="grid gap-4 md:grid-cols-2 items-start"></div>
-        <div id="pagination" class="flex justify-center gap-2 mt-8"></div>
-    </main>
+
+    <div class="flex flex-col md:flex-row gap-8">
+        <aside class="w-full md:w-72 flex-shrink-0">
+            <div class="sticky top-8 bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100">
+                <div class="flex items-center gap-3 mb-6 px-2">
+                    <div class="bg-[#63223C] p-2 rounded-lg">
+                        <i data-lucide="layers" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <h3 class="text-[#63223C] font-black text-lg tracking-tight">KONU BAŞLIKLARI</h3>
+                </div>
+                
+                <div class="flex flex-col gap-2">
+                    <button onclick="setFilter('all')" id="btn-all" class="cat-btn active">Tümü</button>
+                    <button onclick="setFilter('sular')" id="btn-sular" class="cat-btn">Sular</button>
+                    <button onclick="setFilter('abdest')" id="btn-abdest" class="cat-btn">Abdest</button>
+                    <button onclick="setFilter('mesh')" id="btn-mesh" class="cat-btn">Mesh</button>
+                    <button onclick="setFilter('teyemmüm')" id="btn-teyemmüm" class="cat-btn">Teyemmüm</button>
+                    <button onclick="setFilter('gusül')" id="btn-gusül" class="cat-btn">Gusül</button>
+                    <button onclick="setFilter('necaset')" id="btn-necaset" class="cat-btn">Necaset</button>
+                    <button onclick="setFilter('namaz')" id="btn-namaz" class="cat-btn">Namaz</button>
+                    <button onclick="setFilter('kurban')" id="btn-kurban" class="cat-btn">Kurban</button>
+                    <button onclick="setFilter('av')" id="btn-av" class="cat-btn">Av</button>
+                    <button onclick="setFilter('oruç')" id="btn-oruç" class="cat-btn">Oruç</button>
+                    <button onclick="setFilter('zekat')" id="btn-zekat" class="cat-btn">Zekat</button>
+                    <button onclick="setFilter('umre')" id="btn-umre" class="cat-btn">Hac & Umre</button>
+                    <button onclick="setFilter('finans')" id="btn-finans" class="cat-btn">Finans</button>
+                    <button onclick="setFilter('ibadet')" id="btn-ibadet" class="cat-btn">İbadet & Temizlik</button>
+                    <button onclick="setFilter('aile')" id="btn-aile" class="cat-btn">Aile & Yaşam</button>
+                </div>
+            </div>
+        </aside>
+
+        <div class="flex-1">
+            <div id="faqContainer" class="grid gap-4 lg:grid-cols-2 items-start">
+                </div>
+            <div id="pagination" class="flex justify-center gap-2 mt-12"></div>
+        </div>
+    </div>
+</main>
 
     <script>
         const allData = [
             // --- MEST, ABDEST VE GUSÜL ---
-            { c: 'mesh', s: 'Mest üzerine mesh yapabilmenin temel şartları nelerdir?', v: 'vacip', r: 'Mestlerin abdestli giyilmesi, topukları örtmesi, en az 5 km yola dayanıklı olması ve üzerinde 3 parmak miktarında delik bulunmaması gerekir.' },
+            { c: 'mesh', s: 'Mest üzerine mesh yapabilmenin temel şartları nelerdir?', v: '', r: 'Mestlerin abdestli giyilmesi, topukları örtmesi, en az 5 km yola dayanıklı olması ve üzerinde 3 parmak miktarında delik bulunmaması gerekir.' },
             { c: 'mesh', s: 'Mesh süresi ne kadardır ve ne zaman başlar?', v: 'vacip', r: 'Mukim için 24, seferi için 72 saattir. Süre, mest giyildikten sonra ilk abdestin bozulduğu andan itibaren başlar.' },
             { c: 'mesh', s: 'Mestler ayaktan çıkarılırsa abdest bozulur mu?', v: 'caiz', r: 'Kişi abdestli ise sadece ayaklarını yıkaması yeterlidir. Ancak mestin tamamen çıkması veya ayağın büyük kısmının dışarı kayması abdesti bozar.' },
             { c: 'mesh', s: 'Sargı üzerine meshin hükmü nedir?', v: 'caiz', r: 'Sargıyı açmak zarar veriyorsa üzerine bir kez meshedilir. Süre sınırı yoktur, yara iyileşene kadar devam eder. Sargının abdestli sarılması şart değildir.' },
@@ -172,6 +271,13 @@
             { c: 'abdest', s: 'Abdestin edepleri (müstehapları) nelerdir?', v: 'caiz', r: 'Vakit girmeden hazır bulunmak, kıbleye yönelmek ve abdest sonunda şehadet getirmek.' },
             { c: 'abdest', s: 'Vücuttaki hangi lekeler abdeste engel değildir?', v: 'caiz', r: 'Tırnak kiri, sinek tersi engel değildir. Ancak su geçirmeyen boya, hamur, mum abdeste manidir.' },
             { c: 'abdest', s: 'Abdest alıp almadığında şüpheye düşen ne yapmalıdır?', v: 'caiz', r: 'Abdestli olduğunu kesin bilip bozulduğunda şüphe eden kişi abdestli sayılır.' },
+            { c: 'abdest', s: 'Gusülde vücuttaki tüm kılları tek tek ovmak şart mıdır?', v: 'caiz', r: 'Sadece saç ve sık sakalı birkaç kere ovmak yeterlidir. Kirpik veya burun içi kılları gibi diğer kılların tek tek ovalanması gerekmez; suyun ulaşması kafidir. İbadeti aşırı vakit alacak hale getirmek vesvesedir.' },
+            { c: 'abdest', s: 'Sabah kalktığında çamaşırda görülen belirsiz ıslaklık gusül gerektirir mi?', v: 'caiz', r: 'Meni olduğu kesin bilinmedikçe gusül gerekmez. Eğer bakmak kişide daha büyük vesveseye yol açıyorsa hiç bakmamalıdır. Haberiniz olmayan bir durumdan dolayı mesul ve günahkar olmazsınız.' },
+            { c: 'abdest', s: 'Meni olduğuna dair kesin kanaat oluşmadıkça kişi cünüp sayılır mı?', v: 'caiz', r: 'Hayır. Cima (ilişki) veya rüyalanma durumu hatırlanmıyorsa ve elbisedeki şeyin meni olduğuna tam kanaat getirilemiyorsa kişi cünüp sayılmaz; ibadetlerine devam edebilir.' },
+            { c: 'aile', s: 'Gayrimüslimlerin bayramlarına mahsus hediyeleri alıp vermek küfür müdür?', v: 'haram', r: 'Bu bayramları meşru görerek ve tazim (yüceltme) amacıyla yapılırsa küfürdür. Sadece örfe uyarak, bu niyet olmaksızın yapılırsa büyük günah olur.' },
+            { c: 'aile', s: 'Haram bir içeriği sosyal medyada beğenmek kişiyi dinden çıkarır mı?', v: 'mekruh', r: '"Bu haram keşke helal olsaydı" düşüncesiyle beğenmek risklidir. Ancak sadece tanıdık olduğu için veya nefsi bir hoşlantıyla (haramlığını inkar etmeden) beğenmek küfür değil, günahtır.' },
+            { c: 'abdest', s: '10 günü aşan adet (hayız) kanamalarında namaz kılınmalı mıdır?', v: 'vacip', r: 'Hanefi mezhebinde hayzın en fazla süresi 10 gündür. 10 günden sonra gelen kan özür (istihaze) sayılır; namazların kılınması gerekir.' },
+            { c: 'abdest', s: 'Adet süresi değişen (örneğin 8 günden 11 güne çıkan) biri nasıl davranmalıdır?', v: 'vacip', r: 'Adet alışkanlığı değişebilir ancak sınır 10 gündür. 10 günü aşan kısımlarda mutlaka namaza başlanmalıdır; önceki günlerde kılınan namazlar ise geçerli kabul edilir.' },
 
             // --- SULAR VE NECASET (15 SORU) ---
             { c: 'sular', s: 'Sular temel olarak kaça ayrılır?', v: 'caiz', r: 'Mutlak ve mukayyed sular. Mutlak sularla abdest alınır, mukayyedlerle (gül suyu vb.) alınmaz.' },
@@ -383,26 +489,37 @@
             { c: 'finans', s: 'Emekli maaşı almak helal midir?', v: 'caiz', r: 'Devletin vatandaşına sunduğu sosyal bir hizmettir. Yalan beyanla alınmadığı sürece caizdir.' },
             { c: 'finans', s: 'YouTube reklam geliri kazanmak caiz mi?', v: 'mekruh', r: 'Reklam içeriklerinin (gayri İslami reklamlar vb.) kontrol edilememesi ve teşhir unsurları nedeniyle fıkhen uygun görülmemektedir.' },
             { c: 'finans', s: '"Yarısı Bizden" kampanyası desteğini almak caiz midir?', v: 'caiz', r: 'Hibe ve tahliye bedellerini almak caizdir. Kredi desteği ise 3 yıl içinde (faiz binmeden) geri ödenirse caizdir; faizli modellere girilmemelidir.' },
+            { c: 'finans', s: 'Banka promosyonu ev ihtiyaçlarını karşılamak için kullanılabilir mi?', v: 'haram', r: 'Hayır, promosyonun şahsi menfaat veya ev ihtiyaçları için kullanılması caiz değildir. Bu para, sevap beklenmeksizin ihtiyaç sahiplerine dağıtılmalıdır.' },
+            { c: 'finans', s: 'Banka promosyonu ile avukatlık ücreti veya şahsi borç ödemesi yapılabilir mi?', v: 'haram', r: 'Hayır. Kişinin bu paradan herhangi bir dünyevi fayda sağlaması uygun görülmemiştir; avukat ücreti gibi borçlar bu paradan ödenemez.' },
+            { c: 'finans', s: 'Maddi durumu zayıf olanlar çocuklarının promosyon parasını kullanabilir mi?', v: 'haram', r: 'Kişinin mali ihtiyacı ne olursa olsun, "habis" kabul edilen bu kazancı kendi ihtiyaçları için harcaması caiz değildir.' },
+            { c: 'finans', s: 'Promosyonun kullanılabileceğine dair farklı fetvalara itibar edilmeli mi?', v: 'vacip', r: 'Bazı görüşler izin verse de, fıkhi takva ve ihtiyata en uygun olanı, bu paranın mülkiyete dahil edilmeden elden çıkarılmasıdır.' },
+            { c: 'fıkıh', s: 'Asansör kullanmayan giriş kat sakinlerinin masraflara katılması kul hakkı mıdır?', v: 'caiz', r: 'Genel kural örf ve yönetim planıdır. Ancak üst kattakilerin fedakarlık yapması veya alt kattakilerin rızasıyla muaf tutulması takvaya daha uygundur.' },
+            { c: 'fıkıh', s: 'Ortak iş yerinde kardeşlerin farklı miktarda harcama yapması hak mıdır?', v: 'vacip', r: 'Evet, birinin fazla çekmesi hakka girmesine sebep olabilir. Yıl sonunda hesap dökümü yapılmalı ve taraflar karşılıklı helalleşmelidir.' },
+            { c: 'namaz', s: 'Yatsı namazının son sünnetini dört rekat kılmanın hükmü ve fazileti nedir?', v: 'sünnet', r: 'Kadir Gecesi faziletine denk olduğuna dair rivayetler vardır. İkindinin sünneti gibi gayri müekket kılınır (ilk oturuşta Salli-Barik okunur).' },
+            { c: 'namaz', s: 'Namazda beşinci rekata kalkan kişi ne yapmalıdır?', v: 'vacip', r: '4. rekatta oturduysa, 5. rekatın secdesinden önce fark ederse hemen oturup selam verir. Secdeyi yaptıysa 6’ya tamamlar; son iki rekat nafile olur.' },
+            { c: 'finans', s: 'Borsa üzerinden hisse senedi alıp satmak caiz midir?', v: 'haram', r: 'Mülkiyetin geçiş süresi (valör) ve reel değer farkları gibi teknik nedenlerle mutlak manada caiz görülmemektedir.' },
+            { c: 'ticaret', s: 'İmitasyon (çakma) ürün üretmek ve satmak ne zaman caiz olur?', v: 'haram', r: 'Tüketiciyi aldatıyor veya marka sahibine zarar veriyorsa haramdır. Ancak herkesin çakma olduğunu bildiği durumlarda ruhsat olabilir.' },
+            { c: 'fıkıh', s: 'Borcun geç ödenmesi durumunda enflasyon farkı talep edilebilir mi?', v: 'caiz', r: 'İmam Ebu Yusuf’a göre borçlu imkanı varken geciktirirse, alacaklı paranın değer kaybını talep edebilir.' },
+            { c: 'aile', s: 'Resmi nikah kıyılmadan dini nikah yapılması uygun mudur?', v: 'mekruh', r: 'Mağduriyetlerin önlenmesi ve nikahın ciddiyeti adına resmi nikahın öncelenmesi veya eş zamanlı yapılması tavsiye edilir.' },
+            { c: 'abdest', s: 'Özel günündeki (hayız) bir kadın Kur’an-ı Kerim okuyabilir mi?', v: 'haram', r: 'Dört mezhebe göre caiz değildir. Sadece dua ayetlerini dua niyetiyle (okuma kastı olmadan) okuyabilir.' },
 
             // --- AİLE VE YAŞAM ---
             { c: 'aile', s: 'Şaraptan çevrilmiş sirke caiz mi?', v: 'caiz', r: 'Tamamen sirkeye dönüşmüşse tüketilmesi helaldir.' },
             { c: 'aile', s: 'Kadınların kaş ortasını alması?', v: 'caiz', r: 'Tek kaş görüntüsü psikolojiyi bozuyorsa fazlalıklar alınabilir.' },
             { c: 'aile', s: 'Kuzenlerin aynı odada kalması?', v: 'haram', r: 'Kuzenler mahrem değildir, halvet caiz değildir.' },
-            { c: 'aile', s: 'Mesajla boşama geçerli mi?', v: 'haram', r: 'Mesajla "boş ol" yazmakla talak vaki olur.' },
-            { c: 'aile', s: 'Saç ve tırnaklar nasıl imha edilmeli?', v: 'vacip', r: 'İnsan azizdir, parçaları toprağa gömülmelidir.' },
+            { c: 'aile', s: 'Mesajla boşama geçerli mi?', v: 'caiz', r: 'Mesajla "boş ol" yazmakla talak vaki olur.' },
             { c: 'aile', s: 'Mehir hakkı düşer mi?', v: 'vacip', r: 'Boşansa da koca ölse de kadının sabit hakkıdır.' },
             { c: 'aile', s: 'Gıybetten sonra "yüzüne söylüyorum" demek?', v: 'haram', r: 'Bu durum vebali kaldırmaz, gıybet günahtır.' },
             { c: 'aile', s: 'Yengeyle evlenmek caiz mi?', v: 'caiz', r: 'İddet süresi bittikten sonra şer’an engel yoktur.' },
             { c: 'aile', s: 'Kocadan habersiz para almak?', v: 'caiz', r: 'Sadece zaruri ihtiyaç için yeteri kadar alınabilir.' },
-            { c: 'aile', s: 'Gizli ikinci evlilik caiz mi?', v: 'haram', r: 'Yalan ve zulme sebep olduğu için caiz görülmez.' },
-            { c: 'aile', s: 'Hapisteki eşten nikah düşer mi?', v: 'caiz', r: 'Sadece ayrı kalmakla nikah düşmez.' },
+            { c: 'aile', s: 'Gizli ikinci evlilik caiz mi?', v: '', r: 'Yalan ve zulme sebep olduğu için caiz görülmez.' },
+            { c: 'aile', s: 'Hapisteki eşten nikah düşer mi?', v: '', r: 'Sadece ayrı kalmakla nikah düşmez.' },
             { c: 'aile', s: 'Mürtet akrabaya sıla-i rahim?', v: 'vacip', r: 'Akrabalık bağı korunmalı, koparılmamalıdır.' },
             { c: 'aile', s: 'Mirasta çocuklara mal paylaşımı?', v: 'vacip', r: 'Çocuklar arasında adil olunmalı, ayrım yapılmamalıdır.' },
             { c: 'aile', s: 'Normal tatil yerlerine gitmek?', v: 'haram', r: 'Haramların işlendiği ortamlarda bulunmak vebaldir.' },
             { c: 'aile', s: 'Oyuncaklarla oynamak caiz mi?', v: 'caiz', r: 'Çocuk gelişimi için caizdir.' },
             { c: 'aile', s: 'Sosyal medyada paylaşım yapmak?', v: 'caiz', r: 'Mahremiyete ve harama girmedikçe caizdir.' },
             { c: 'aile', s: 'Dövme yaptırmanın hükmü?', v: 'haram', r: 'Yaradılışı değiştirmek ve necis sayıldığı için haramdır.' },
-            { c: 'aile', s: 'Müzik dinlemek caiz mi?', v: 'mekruh', r: 'İsyan ve harama teşvik eden müzikler haramdır.' },
 
             // --- AİLE VE MİRAS (7 SORU) ---
             { c: 'aile', s: 'Eşine "kızım" veya "yavrum" diyen erkeğin nikahı düşer mi?', v: 'caiz', r: 'Şefkat maksadıyla söylendiği için nikaha zarar vermez. Zihar (mahreme benzetme) niyeti yoksa sorun yoktur.' },
@@ -414,7 +531,41 @@
             // --- SAĞLIK VE AİLE MESELELERİ (6 SORU) ---
             { c: 'aile', s: 'Tüp bebek yaptırmak caiz midir?', v: 'mekruh', r: 'Fıtri olmadığı için genel olarak tavsiye edilmez. Sadece yabancı sperm/yumurta kullanılmaması ve yuva yıkılması gibi ağır zaruretlerde şahsa özel değerlendirilir.' },
             { c: 'aile', s: 'Saç ektirmek veya estetik ameliyat caiz midir?', v: 'haram', r: 'Keyfi estetik "yaratılışı değiştirmek" sayıldığı için caiz değildir. Ancak kaza sonucu oluşan bozukluğu gidermek amaçlı tıbbi müdahale caizdir.' },
-            { c: 'aile', s: 'Aldatma (zina) durumunda dini nikah düşer mi?', v: 'haram', r: 'Zina büyük günahtır ama kendiliğinden nikahı bitirmez. Taraflar tövbe edip devam etmek isterse nikah bakidir.' },
+            { c: 'aile', s: 'Aldatma (zina) durumunda dini nikah düşer mi?', v: '', r: 'Zina büyük günahtır ama kendiliğinden nikahı bitirmez. Taraflar tövbe edip devam etmek isterse nikah bakidir.' },
+
+            // --- FIKIH USULÜ VE SOSYAL HAYAT (13 SORU) ---
+            { c: 'gusül', s: 'Boy abdesti alırken niyet etmek şart mıdır?', v: 'caiz', r: 'Hanefi mezhebine göre niyet sevap kazanma şartıdır, sıhhat (geçerlilik) şartı değildir. Niyet etmeden tüm vücudu yıkayan kişinin guslü geçerlidir.' },
+            { c: 'abdest', s: 'Islak mendil ile taharet (temizlik) geçerli olur mu?', v: 'caiz', r: 'Necaset yayılmamışsa geçerlidir. Ancak yayılmışsa su ile yıkamak (gasl) şarttır.' },
+            { c: 'necaset', s: 'Pürüzsüz yüzeylerdeki (fayans, bıçak) necaset nasıl temizlenir?', v: '', r: 'Hanefi’ye göre silinerek giderilmesi yeterlidir. Şafii mezhebine göre ise mutlaka yıkanmalıdır.' },
+            { c: 'namaz', s: 'Namazda harfleri tam çıkaramadığını düşünen kişi ne yapmalıdır?', v: '', r: 'Bu durum genellikle vesvesedir. Büyük bir hata yoksa namaz iade edilmemeli; bir hocadan talim alınarak vesveseye itibar edilmemelidir.' },
+            { c: 'namaz', s: 'Sessiz namazda imamın yanlışlıkla sesli okumasının hükmü nedir?', v: '', r: 'İmamın sehiv secdesi yapması gerekir. Tek başına kılanın ise sehiv secdesi yapması gerekmez.' },
+            { c: 'abdest', s: 'Normal pamuklu çorap üzerine mest yapılır mı?', v: 'haram', r: 'Hayır, caiz değildir. Mestin su geçirmemesi, belli mesafe yürünecek kadar dayanıklı olması ve bağsız dik durabilmesi şarttır.' },
+            { c: 'zekat', s: 'Yıl içinde paraya eklenen yeni paraların zekat günü nasıl hesaplanır?', v: 'vacip', r: 'Yıl içinde eklenen aynı cins mallar için ayrı yıl beklenmez; zekat tarihinde eldeki toplam miktar üzerinden verilir.' },
+            { c: 'finans', s: 'Eski basım/hasarlı doları daha düşük fiyata dolarla takas etmek caiz mi?', v: 'haram', r: 'Hayır, aynı cins paraların takasında fark olması faizdir. Farklı bir para birimi (TL) üzerinden işlem yapılarak bu sorundan kaçınılabilir.' },
+            { c: 'ticaret', s: 'Satış elemanı çalıştığı iş yerinden kendine ürün alabilir mi?', v: 'caiz', r: 'Kurumsal firmalarda fiyat sabitse ve personele indirimli alım izni verilmişse caizdir.' },
+            { c: 'aile', s: 'Resmiyette boşanan ancak dini nikahı sorulmayan çiftin durumu nedir?', v: '', r: 'Resmi boşanmanın mahiyetine göre dini nikah bitebilir veya devam edebilir; her vaka bir uzmana (müftülüğe) danışılmalıdır.' },
+            { c: 'akide', s: 'Irkçılık yapan bir Müslüman dinden çıkar mı?', v: '', r: 'Irkçılık büyük günahtır ancak sadece bu günahla kişi kafir olmaz. Ancak ırkçılık yasağını inkar ederse risk doğar.' },
+            { c: 'fıkıh', s: 'Boks gibi sporlarla uğraşmak ve bu konuda "Allah’ın izniyle kazanacağım" demek kişiyi kafir eder mi?', v: '', r: 'Boks, yüze vurulması ve zarar vermesi hasebiyle haram bir unsurdur. Ancak bu işi yaparken "Allah’ın izniyle" demek kişiyi kafir etmez; sadece haram bir işte bu tür ifadeler kullanmak uygun değildir. Cehalet mazeret sayılabilir.' },
+            { c: 'fıkıh', s: 'Boks sporunda kendini savunmayı öğrenmek için birine vesile olmak günah mıdır?', v: 'caiz', r: 'Vuruş tekniklerini öğrenmek ve antrenman yapmak amacıyla birini bu spora yönlendirmekte vebal yoktur. Niyet kendini savunmayı öğrenmekse caizdir.' },
+            { c: 'abdest', s: 'Kan akması Hanefi’de abdesti bozarken Şafii’de bozmuyor; bu durum nasıl açıklanır?', v: '', r: 'Bu durum içtihad farkıdır. Hanefi birisi Şafii mezhebine (veya tersi) geçebilir ancak sadece işine gelen kolay hükümleri alamaz (telfik yapılamaz). Mezhep değiştirecekse o mezhebin tüm usulüne uymalıdır.' },
+            { c: 'fıkıh', s: 'Asansör kullanmayan giriş kat sakinlerinin asansör giderlerine katılması kul hakkı mıdır?', v: '', r: 'Örf ve yönetim planı esastır. Ancak üst kattakilerin fedakarlık yapması veya alt kattakilerin rızasıyla muaf tutulması takvaya daha uygundur.' },
+            { c: 'fıkıh', s: 'Ortak iş yerinde kardeşlerin farklı harcama yapması hak geçmesine sebep olur mu?', v: '', r: 'Evet. Yıl sonunda hesap dökümü yapılmalı, çekilen farklar netleşmeli ve karşılıklı helalleşme ile o defter kapatılmalıdır.' },
+            { c: 'namaz', s: 'Yatsı namazının son sünnetini dört rekat kılmanın hükmü nedir?', v: 'sünnet', r: 'Kadir Gecesi faziletine denk olduğuna dair rivayetler vardır. İkindinin sünneti gibi kılınır; ilk oturuşta Salli-Barik okunur, 3. rekata Sübhaneke ile başlanır.' },
+            { c: 'namaz', s: 'Namazda beşinci rekata kalkan kişi ne yapmalıdır?', v: '', r: '4. rekatta oturduysa, 5. rekatın secdesinden önce fark ederse hemen oturup selam verir. Secdeyi yaptıysa bir rekat daha ekleyip 6’ya tamamlar; son iki rekat nafile olur.' },
+            { c: 'finans', s: 'Borsa üzerinden hisse senedi alıp satmak (borsa oynamak) caiz midir?', v: 'haram', r: 'Mülkiyetin geçiş süresi (valör), açığa satış ve reel değer farkları gibi nedenlerle mutlak manada caiz görülmemektedir.' },
+            { c: 'finans', s: 'Katılım bankalarından alınan "kar payı" helal midir?', v: 'mekruh', r: 'Standart kar paylarına şüphe nedeniyle mutlak cevaz verilmez. Ancak paranın doğrudan ticarete yönlendirildiği "Özel Fon Havuzları" fıkhen daha güvenlidir.' },
+            { c: 'ticaret', s: 'İmitasyon (çakma) ürün üretmek ve satmak caiz midir?', v: 'haram', r: 'Tüketiciyi aldatıyor veya marka sahibine zarar veriyorsa haramdır. Ancak herkesin çakma olduğunu bildiği ve orijinal pazarı etkilemeyen durumlarda ruhsat olabilir.' },
+            { c: 'fıkıh', s: 'Borcun geç ödenmesi durumunda enflasyon farkı talep edilebilir mi?', v: 'caiz', r: 'İmam Ebu Yusuf’a göre borçlu imkanı varken geciktirirse, alacaklı paranın enflasyon karşısındaki değer kaybını talep edebilir.' },
+            { c: 'aile', s: 'Resmi nikah olmadan dini nikah kıyılması uygun mudur?', v: 'mekruh', r: 'Tarafların mağdur olmaması ve nikahın ciddiyeti için önce resmi nikahın kıyılması veya eş zamanlı yapılması tavsiye edilir.' },
+            { c: 'abdest', s: 'Özel günündeki (hayız) bir kadın Kur’an okuyabilir mi?', v: 'haram', r: 'Dört mezhebe göre caiz değildir. Sadece dua ayetlerini dua niyetiyle (tilavet kastı olmadan) okuyabilir.' },
+            { c: 'aile', s: 'Peygamber Efendimiz (s.a.v.) için argo/sokak ağzı ile övgü dolu sözler söylemek küfür müdür?', v: 'caiz', r: 'Eğer içinde alay, hakaret veya küçümseme (tahkir) manası yoksa sırf ifade tarzından dolayı kişi dinden çıkmaz. Ancak edep ölçülerine dikkat edilmelidir.' },
+            { c: 'fıkıh', s: 'Kur’an-ı Kerim okunan bir kayda fon müziği veya yankı (reverb) eklemek caiz mi?', v: 'haram', r: 'Yavaşlatmak veya yankı eklemek güzelleştirme amaçlıysa sakıncası yoktur. Ancak Kur’an arkasına fon müziği eklemek haramdır. Eğer Kur’an okunurken kasıtlı çalgı çalınırsa bu küfürdür.' },
+            { c: 'namaz', s: 'Tuvalet ihtiyacı varken namaza durmak caiz midir?', v: 'mekruh', r: 'Sıkışıkken namaza durmak mekruhtur. Ancak kişide sürekli bir tuvalet hissi (vesvese derecesinde) varsa bu durum mekruhluğu kaldırır; namazını kılabilir.' },
+            { c: 'fıkıh', s: 'Müzik dinlemek kesin olarak haram mıdır?', v: 'haram', r: 'Hanefi alimlerine göre Lokman suresindeki "boş söz" ifadesi müziği temsil eder ve dinlenmesi haramdır. Ancak helal saymadığı sürece sadece dinlemek kişiyi dinden çıkarmaz.' },
+            { c: 'aile', s: '"Ya Rabbi sorgusuz sualsiz cennet nasip et" diye dua etmek kadere itiraz mıdır?', v: 'caiz', r: 'Hayır, caizdir. Bu dua acziyeti ifade eder ve kulluğun özüdür. Allah’tan lütuf istemek her zaman mümkündür.' },
+            { c: 'ticaret', s: 'Boykot ürünlerini mecburiyetten tüketirken besmele çekilir mi?', v: 'caiz', r: 'Bu ürünleri kullanmak haram değildir (mekruhtur). Dolayısıyla tüketirken besmele çekmek uygundur.' },
+            { c: 'fıkıh', s: 'Regaip Kandili nedir, bu gecede ne yapılmalıdır?', v: 'sünnet', r: 'Recep ayının ilk Cuma gecesidir. İbadet, zikir ve bağışlanma dileğiyle geçirilmesi tavsiye edilir.' },
+            { c: 'aile', s: 'İslam’da emredilen hakiki tesettürün sınırı nedir?', v: 'farz', r: 'En kamil şekli çarşaftır. Genel ölçü ise vücut hatlarını belli etmeyen, baştan göğüs hizasına kadar inen tek parça örtü ve geniş elbiselerdir. Başörtüsüyle teşhir amaçlı video çekmek günahtır.' },
             { c: 'aile', s: 'Şiddet gören kadının resmi mahkeme ile boşanması dini nikahı bitirir mi?', v: 'caiz', r: 'Zulüm söz konusuysa ve hoca heyeti onay verirse, resmi mahkeme boşaması dini açıdan da geçerli sayılabilir.' }
         ];
         
@@ -516,6 +667,43 @@ function renderFAQ() {
         }
         renderFAQ();
         lucide.createIcons();
+        // Arama Fonksiyonu
+// Arama Fonksiyonu (DÜZELTİLMİŞ)
+function performSearch() {
+    const input = document.getElementById('search-input');
+    if (!input) return;
+    
+    const searchTerm = input.value.toLowerCase().trim();
+    
+    // 1. Filtreleme: Soru veya Cevap içinde ara
+    filteredData = allData.filter(item => 
+        item.s.toLowerCase().includes(searchTerm) || 
+        item.r.toLowerCase().includes(searchTerm)
+    );
+
+    // 2. Sidebar Butonlarını Temizle: Arama yapılınca kategoriyi "Tümü" yap
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    const allBtn = document.getElementById('btn-all');
+    if(allBtn) allBtn.classList.add('active');
+
+    // 3. Ekrana Bas: Sayfayı 1 yap ve renderFAQ'yu çağır
+    currentPage = 1;
+    renderFAQ(); 
+}
+
+// Giriş kutusuna yazarken de anlık arama yapması için bunu ekleyebilirsin:
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input');
+    if(searchInput) {
+        searchInput.addEventListener('input', performSearch); // Yazdıkça arar
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performSearch(); // Enter'a basınca arar
+        });
+    }
+});
     </script>
 </body>
 </html>
