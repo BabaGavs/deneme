@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUFEM Fıkıh Portalı | Sultander</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
    <style>
         :root { --sufem-red: #dc2626; --sufem-dark: #1e293b; }
@@ -69,10 +70,12 @@
     <header class="bg-white border-b border-slate-200 py-6 sticky top-0 z-50">
         <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="cursor-pointer" onclick="window.location.reload()">
-                <div class="sufem-logo-btn">
-                    <h1 class="text-3xl font-black text-slate-700 tracking-tighter">SUFEM</h1>
-                </div>
+                <div class="sufem-logo-btn flex items-center gap-3">
+                <div class="bg-red-600 p-2 rounded-lg text-white">
+                <i data-lucide="book-open-check" class="w-6 h-6"></i>
             </div>
+                <h1 class="text-3xl font-black text-slate-700 tracking-tighter">SUFEM</h1>
+        </div>
             <div class="text-center md:text-right">
                 <h2 class="text-lg font-bold text-slate-800 tracking-tight">Sultander Fıkıh İhtisas Eğitim Merkezi</h2>
                 <p class="text-[10px] uppercase tracking-widest font-bold text-slate-400">Fetva ve Fıkhi Araştırmalar Portalı</p>
@@ -116,6 +119,8 @@
             { c: 'abdest', s: 'Vücuttan çıkan hangi sıvılar abdesti bozar?', v: 'vacip', r: 'Önden ve arkadan çıkan her türlü necaset ve yel çıkması abdesti bozar. Diğer yerlerden çıkan kan ise çıkış yerinden taşarsa bozar.' },
             { c: 'abdest', s: 'Kusmak hangi durumda abdesti bozar?', v: 'vacip', r: 'Ağız dolusu (kolayca yutulamayacak kadar) kusmak abdesti bozar. Daha azı bozmaz.' },
             { c: 'abdest', s: 'Uyku ve gülme abdesti hangi şartlarda bozar?', v: 'vacip', r: 'Makatın yerden kesildiği uyku halleri ve namaz içinde başkasının duyacağı kadar kahkaha ile gülmek abdesti bozar.' },
+            { c: 'abdest', s: 'Sivilce patlatmak veya sivilceden çıkan sıvı abdesti bozar mı?', v: 'vacip', r: 'Çıkan irin veya kan çıktığı yeri aşarak yayılırsa abdest bozulur. Sadece kuru yağ tabakası çıkması veya sıvının yayılmaması abdesti bozmaz.' },
+            { c: 'abdest', s: 'Ağlamak veya gözden gelen akıntı abdesti etkiler mi?', v: 'caiz', r: 'Normal gözyaşı necis değildir, bozmaz. Ancak hastalık/ağrı sebebiyle gelen irin veya iltihaplı akıntı abdesti bozar.' },
             { c: 'abdest', s: 'Abdesti bozmayan durumlardan bazıları nelerdir?', v: 'caiz', r: 'Hastalık dışı gözyaşı, vücuttan kopan deri, balgam, tırnak kesmek, tıraş olmak ve başkasının vücuduna dokunmak abdesti bozmaz.' },
             { c: 'gusül', s: 'Gusül abdestini farz kılan durumlar nelerdir?', v: 'vacip', r: 'Şehvetle meninin gelmesi, cinsel ilişki, hayız ve nifas hallerinin sona ermesi guslü farz kılar.' },
             { c: 'gusül', s: 'Guslün farzları nelerdir?', v: 'vacip', r: 'Ağza su vermek, burnuna su vermek ve tüm vücudu iğne ucu kadar kuru yer kalmayacak şekilde yıkamaktır.' },
@@ -139,7 +144,9 @@
             { c: 'namaz', s: 'Tadil-i Erkan ve Huruç bisun\'ihi neyi ifade eder?', v: 'vacip', r: 'Tadil-i erkan rükünleri yerli yerince yapmaktır. Huruç bisun\'ihi ise namazdan kendi isteğiyle çıkmaktır.' },
             { c: 'namaz', s: 'Cuma namazının farz olması için gereken kişisel şartlar nelerdir?', v: 'vacip', r: 'Erkek olmak, mukim olmak, sağlıklı olmak ve yürüyebilecek durumda olmak gerekir.' },
             { c: 'namaz', s: 'Cenaze namazının hükmü ve temel farkı nedir?', v: 'vacip', r: 'Farz-ı kifâyedir. Rükû ve secdesi yoktur, ayakta 4 tekbirle kılınır.' },
-            { c: 'namaz', s: 'Bayram namazları bir özür nedeniyle ilk gün kılınamazsa ne yapılır?', v: 'caiz', r: 'Ramazan bayramı 2. gün, Kurban bayramı 3. gün istiva vaktine kadar kılınabilir.' },// Hata buradaydı: Virgül eklendi.
+            { c: 'namaz', s: 'Bayram namazları bir özür nedeniyle ilk gün kılınamazsa ne yapılır?', v: 'caiz', r: 'Ramazan bayramı 2. gün, Kurban bayramı 3. gün istiva vaktine kadar kılınabilir.' },
+            { c: 'namaz', s: 'Çok fazla kaza borcu olan biri bunları oturarak kılabilir mi?', v: 'haram', r: 'Kaza namazı farz hükmündedir. Ayakta durmaya gücü yeten birinin yorgunluk sebebiyle oturarak kılması caiz değildir; ancak hastalık durumunda oturulabilir.' },
+            { c: 'namaz', s: 'Kaza borcu olanlar Nafile (sünnet) namaz kılabilir mi?', v: 'caiz', r: 'Hanefi mezhebine göre sünnetleri ve kazaları beraber kılmak caizdir. Şafii mezhebinde ise tüm vaktin kazaya ayrılması istenir.' },
 
             // --- TEYEMMÜM (12 SORU) ---
             { c: 'teyemmüm', s: 'Teyemmümün sözlük ve dini terim anlamı nedir, nasıl yapılır?', v: 'vacip', r: 'Sözlükte "kastetmek" demektir. Su bulunmadığında niyet edilerek, ellerin toprağa vurulup yüz ve kolların meshedilmesiyle yapılır.' },
@@ -322,6 +329,17 @@
             { c: 'oruç', s: 'Şiddetli ağrı nedeniyle oruç bozulursa 61 gün kefaret gerekir mi?', v: 'caiz', r: 'Hayır. Sağlık mazeretiyle bozulan oruç günah sayılmaz; sadece bayramdan sonra günü gününe kaza yapılır.' },
             { c: 'oruç', s: 'Merhem sürmek veya insülin iğnesi yaptırmak orucu bozar mı?', v: 'mekruh', r: 'Açık yara yoksa merhem bozmaz. İnsülin iğnesi ise Hanefi mezhebinde tercih edilen görüşe göre orucu bozar; kaza tavsiye edilir.' },
             { c: 'oruç', s: 'Oruçlu olduğunu unutarak tırnak yemek orucu bozar mı?', v: 'caiz', r: 'Unutarak yemek/içmek gibi tırnak yemek de bozmaz. Ancak hatırlandığı halde dalgınlıkla yutulursa kaza gerekir.' },
+            { c: 'oruç', s: 'Diş randevusu olan bir kişi o gün oruca niyet etmeli midir?', v: 'vacip', r: 'Evet, niyet etmelidir. Randevunun iptal olması veya müdahalenin ertelenmesi ihtimaline karşı ibadet riske atılmamalıdır. Tedavi gerçekleşmezse oruca devam edilir.' },
+            { c: 'oruç', s: 'Diş tedavisinde yapılan iğne orucu bozar mı?', v: 'vacip', r: 'İmam Ebu Hanife’ye göre vücuda giren her şey orucu bozar. İmameyn’e göre ise sadece doğal menfezlerden (ağız/burun) girişler bozar. Mezhepte tercih edilen görüş, iğnenin orucu bozacağı yönündedir.' },
+            { c: 'oruç', s: 'Kronik hastaların (Şeker vb.) her gün olması gereken iğneler orucu bozar mı?', v: 'caiz', r: 'Zorunlu ve sürekli iğne olması gerekenler için kolaylık vardır. İmameyn’in görüşüne itibar edilerek bu kişilerin orucunun bozulmayacağı söylenebilir; tutmaya devam etmeleri tavsiye edilir.' },
+            { c: 'oruç', s: 'Diş randevusunda iğne yaptıran kişi günün geri kalanında nasıl davranmalıdır?', v: 'vacip', r: 'İğne yapıldıktan sonra iftar vaktine kadar hiçbir şey yiyip içmemeli (oruçlu gibi davranmalı) ve Ramazan’dan sonra bu günü kaza etmelidir.' },
+            { c: 'oruç', s: '10 yaşındaki bir çocuk orucunu bozarsa kefaret veya kaza gerekir mi?', v: 'caiz', r: 'Hayır. Çocuk dinen mükellef değildir; bu yaşta tutturulması alıştırma ve ruhu aşılama amaçlıdır.' },
+            { c: 'oruç', s: 'İftara çok az kala hayız (adet) olan kadının orucu geçerli midir?', v: 'vacip', r: 'Hayır, o günün kaza edilmesi gerekir. Oruç imsak ile güneş batışı arasındaki tam süreyi kapsar; son anda dahi olsa engel durum orucu bozar.' },
+            { c: 'oruç', s: 'Gün içinde temizlenen (adeti biten) bir kadın o gün oruç tutabilir mi?', v: 'vacip', r: 'Hayır, oruç bölünemez. Ancak o günün ve Ramazan’ın hürmetine iftara kadar oruçlu gibi yeyip içmemesi (benzemesi) vaciptir.' },
+            { c: 'oruç', s: 'Oruca niyet ettikten sonra imsak vaktine kadar su içilebilir mi?', v: 'caiz', r: 'Evet. Orucun başlama sınırı niyet anı değil, imsak vaktidir.' },
+            { c: 'oruç', s: 'Cünüp haldeyken sahur yapılabilir mi?', v: 'caiz', r: 'Evet, eller ve ağız yıkanarak sahur yapılabilir. İmsaktan sonra yıkanmak oruca zarar vermez ancak gusülde ağza/burna su verirken mübalağadan kaçınılmalıdır.' },
+            { c: 'oruç', s: 'Göz damlası ve burun spreyi orucu bozar mı?', v: 'vacip', r: 'Göz damlası bozmaz. Ancak burun spreyi/damlası doğal bir menfezden içeri nüfuz ettiği için orucu bozar.' },
+            { c: 'oruç', s: 'Oruç tutamayan yaşlı veya hastaların vermesi gereken günlük fidye miktarı nedir?', v: 'vacip', r: 'İyileşme umudu olmayanlar her gün için bir fitre miktarı fidye verir. 2025 yılı için günlük minimum miktar 180 TL’dir.' },
            
             // --- FİNANS ---
             { c: 'finans', s: 'Emlak Katılım sistemi caiz midir?', v: 'caiz', r: 'Mülk ortaklığı esasına dayandığı için fıkhen caizdir.' },
@@ -329,6 +347,8 @@
             { c: 'finans', s: 'Borsa üzerinden ev sahibi olmak caiz mi?', v: 'haram', r: 'Tamamlanmamış malın ikinci şahıslara satışı Hanefi’de caiz görülmez.' },
             { c: 'finans', s: 'Enflasyon farkını talep etmek faiz midir?', v: 'caiz', r: 'Ödeme geciktirilmişse reel değer kaybını istemek tazmindir.' },
             { c: 'finans', s: 'TOKİ projeleri caiz midir?', v: 'caiz', r: 'Enflasyon sınırı maddesi eklendiği için artık caiz görülmektedir.' },
+            { c: 'finans', s: 'Banka promosyonları helal midir?', v: 'haram', r: 'Paranın bankada kalması şartıyla verilen bu menfaat "habis" kazançtır. Alınmalı ancak sevap beklenmeksizin muhtaçlara dağıtılmalıdır.' },
+            { c: 'finans', s: 'Borç verilen bir parada enflasyon farkı talep edilebilir mi?', v: 'caiz', r: 'Normalde menfaat beklenmez. Ancak borç çok uzun süre gecikmiş ve ciddi değer kaybı varsa, İmam Ebu Yusuf’a göre reel değer kaybı talep edilebilir.' },
             { c: 'finans', s: 'Banka promosyonu öğrenciye verilir mi?', v: 'mekruh', r: 'Özel banka ise sadece ihtiyaç sahibi fakire verilmelidir.' },
             { c: 'finans', s: 'Vade farkı faiz midir?', v: 'caiz', r: 'Taksitli fiyat farkı faiz değildir, alışveriş caizdir.' },
             { c: 'zekat', s: 'Tasarrufa dayalı birikime zekat gerekir mi?', v: 'vacip', r: 'Ticari alacak hükmündedir, zekat verilmelidir.' },
@@ -347,6 +367,12 @@
             { c: 'zekat', s: 'Zekat hesaplanırken uzun vadeli (10 yıllık kredi vb.) borçlar düşülür mü?', v: 'caiz', r: 'Hanefi mezhebine göre vadesi ne kadar uzun olursa olsun tüm borçlar mal varlığından düşülür; kalan kısım nisaba ulaşırsa zekat verilir.' },
             { c: 'zekat', s: 'Muhtacın haberi olmadan kira borcu zekat niyetiyle ödenebilir mi?', v: 'haram', r: 'Hayır. Zekatta temlik (mülk verme) şarttır. Borçlunun izni veya vekaleti olmadan borç ödenmesi zekat yerine geçmez.' },
             { c: 'zekat', s: 'Üretimde kullanılan hammaddelerin (fermuar, düğme vb.) zekatı nasıl verilir?', v: 'vacip', r: 'Bu malzemeler ticari maldır. Zekat dönemindeki reel (güncel piyasa) değerleri üzerinden hesaplanıp listeye dahil edilmelidir.' },
+            { c: 'zekat', s: '"Askıda ekmek" uygulamasına bırakılan paralar zekat yerine geçer mi?', v: 'caiz', r: 'Fırıncı vekil tayin ediliyorsa ve alanın zekata ehil (fakir/Müslüman) olduğunu ayırt edebiliyorsa caizdir.' },
+            { c: 'zekat', s: 'Henüz ergenliğe girmemiş küçük çocuklara zekat verilebilir mi?', v: 'caiz', r: 'Mümeyyiz (iyiyi kötüden ayıran) çocuğa verilebilir. Çok küçükler için mülkiyetin velisine teslim edilmesi şarttır.' },
+            { c: 'zekat', s: 'Yardıma muhtaç komşunun kira borcu zekat niyetiyle ödenebilir mi?', v: 'vacip', r: 'Kişinin mülkiyet hakkı (temlik) için borçlunun izni ve bilgisi dahilinde yapılmalıdır. Habersiz ödeme caiz görülmez.' },
+            { c: 'zekat', s: 'Zekat kimlere verilmez?', v: 'haram', r: 'Kişi kendi alt soyuna (çocuk/torun), üst soyuna (anne/baba/dede) ve eşine zekat veremez.' },
+            { c: 'zekat', s: 'Kardeş, gelin veya damada zekat verilebilir mi?', v: 'caiz', r: 'Muhtaç durumdaki kardeş/yeğene verilebilir. Gelin ve damada da mülkiyetin onlara geçmesi şartıyla verilebilir; ancak kızıyla ortak harcatmak gibi "danışıklı" olmamalıdır.' },
+            { c: 'zekat', s: 'Zekat hayır kurumlarına, derneklere veya camilere verilebilir mi?', v: 'vacip', r: 'Zekatta "temlik" (fakirin mülkiyetine geçirme) şarttır. Kurumun binasına verilmez; ancak kurum zekatı alıp doğrudan muhtaca ulaştırıyorsa vekil sıfatıyla caizdir.' },
            
             // --- MALİ VE TİCARİ MESELELER (6 SORU) ---
             { c: 'finans', s: 'Devletin sunduğu karşılıksız hibe hayvan yardımı alınabilir mi?', v: 'caiz', r: 'Kriterlere gerçekten sahip olunması ve yalan beyanda bulunulmaması şartıyla caizdir. Aksi durum kamu hakkına (kul hakkı) girer.' },
@@ -355,6 +381,8 @@
             { c: 'finans', s: 'Katılım bankaları üzerinden (murabaha) araç/konut almak caiz midir?', v: 'caiz', r: 'Kurumun malı önce mülkiyetine geçirmesi ve ardından kâr ekleyerek vadeli satması şartıyla caizdir.' },
             { c: 'finans', s: 'Kamu veya vakıf araçlarını özel işlerde kullanmak caiz midir?', v: 'haram', r: 'İdareci izin verse dahi şahsi işlerde kullanılamaz; kamu malı yetim hakkıdır ve idarecinin bunu kullandırma yetkisi yoktur.' },
             { c: 'finans', s: 'Emekli maaşı almak helal midir?', v: 'caiz', r: 'Devletin vatandaşına sunduğu sosyal bir hizmettir. Yalan beyanla alınmadığı sürece caizdir.' },
+            { c: 'finans', s: 'YouTube reklam geliri kazanmak caiz mi?', v: 'mekruh', r: 'Reklam içeriklerinin (gayri İslami reklamlar vb.) kontrol edilememesi ve teşhir unsurları nedeniyle fıkhen uygun görülmemektedir.' },
+            { c: 'finans', s: '"Yarısı Bizden" kampanyası desteğini almak caiz midir?', v: 'caiz', r: 'Hibe ve tahliye bedellerini almak caizdir. Kredi desteği ise 3 yıl içinde (faiz binmeden) geri ödenirse caizdir; faizli modellere girilmemelidir.' },
 
             // --- AİLE VE YAŞAM ---
             { c: 'aile', s: 'Şaraptan çevrilmiş sirke caiz mi?', v: 'caiz', r: 'Tamamen sirkeye dönüşmüşse tüketilmesi helaldir.' },
@@ -487,6 +515,7 @@ function renderFAQ() {
             item.classList.toggle('active');
         }
         renderFAQ();
+        lucide.createIcons();
     </script>
 </body>
 </html>
